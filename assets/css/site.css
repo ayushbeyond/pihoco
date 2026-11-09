@@ -671,3 +671,17 @@ html[data-season="winter"]{--brass:#946f3e;--brass-l:#d2b487}
 .page-hero__img{aspect-ratio:4/5;overflow:hidden;max-width:460px;justify-self:end}
 .page-hero__img img{width:100%;height:100%;object-fit:cover}
 @media (max-width:980px){.page-hero--split{grid-template-columns:minmax(0,1fr)}.page-hero__img{justify-self:start;max-width:420px}}
+
+/* v9: lead magnets */
+.scorecard__sample{margin-top:20px}
+.scorecard__sample a{font:600 .66rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--brass);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:4px}
+.guide{padding:0 var(--pad) var(--sec);max-width:calc(var(--max) + var(--pad) * 2);margin:0 auto}
+.guide__inner{background:var(--night);color:var(--ivory);padding:clamp(40px,6vw,80px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 48px;align-items:end}
+.guide__inner .label{grid-column:1/-1;color:var(--brass-l)}
+.guide__title{font:300 clamp(1.9rem,1.3rem + 2vw,3.2rem)/1.06 var(--serif);letter-spacing:-.02em;max-width:22ch;text-wrap:balance}
+.guide__title em{font-style:italic;color:var(--brass-l)}
+.guide__text{grid-column:1;color:var(--muted-l);max-width:44ch}
+.guide__inner .btn{grid-column:2;grid-row:2/span 2;background:var(--ivory);color:var(--ink)}
+.guide__inner .btn:hover{background:var(--brass-l)}
+@media (max-width:980px){.guide__inner{grid-template-columns:minmax(0,1fr)}.guide__inner .btn{grid-column:1;grid-row:auto;justify-self:start}}
+@media (max-width:640px){.guide__inner .btn{width:100%}}
