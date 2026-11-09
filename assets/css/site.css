@@ -698,3 +698,4 @@ html[data-season="winter"]{--brass:#946f3e;--brass-l:#d2b487}
 .mmenu__country select{font-size:.8rem;padding:12px 22px 12px 0}
 @media (max-width:980px){.nav .country{margin-left:auto}.nav .country+.nav__cta{margin-left:16px}}
 @media (max-width:640px){.nav .country{display:none}}
+[hidden]{display:none!important}
