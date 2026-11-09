@@ -51,6 +51,7 @@
     <a href="cafes.html">For cafés</a>
     <a href="#founder">Founder</a>
   </nav>
+  <label class="country"><span class="sr-only">Your country</span><select data-country aria-label="Choose your country for prices"><option value="AED">UAE · AED</option><option value="GBP">UK · GBP</option><option value="SGD">Singapore · SGD</option><option value="USD">Elsewhere · USD</option></select></label>
   <a class="nav__cta" href="#scorecard">Free menu scorecard</a>
   <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle><span class="sr-only">Open menu</span><i></i><i></i></button>
 </header>
@@ -64,6 +65,7 @@
     <a href="#founder">Founder</a>
     <a href="#scorecard">Free menu scorecard</a>
   </nav>
+  <p class="mmenu__country"><label class="country"><span class="sr-only">Your country</span><select data-country aria-label="Choose your country for prices"><option value="AED">UAE · AED</option><option value="GBP">UK · GBP</option><option value="SGD">Singapore · SGD</option><option value="USD">Elsewhere · USD</option></select></label></p>
 </div>
 
 <main id="main">
@@ -162,7 +164,7 @@
       <h3 class="label">What typically changes after an audit</h3>
       <ul>
         <li>A dish moves up the page.</li>
-        <li>A price moves by 50p.</li>
+        <li>A price moves by <span data-cur-small>50p</span>.</li>
         <li>A garnish is simplified.</li>
         <li>A dish is retired — and a station is freed.</li>
       </ul>
