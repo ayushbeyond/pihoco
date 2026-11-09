@@ -7,7 +7,7 @@ window.PIHOCO = {
 
   /* Web3Forms access key (web3forms.com). When set, every form is emailed to the
      address the key was created for. Takes priority over `endpoint`. */
-  web3formsKey: '',
+  web3formsKey: '7b083011-54a9-4b02-805a-05c1f4c111e7',
 
   /* true only on a Web3Forms paid plan: shows the menu upload button. On the free
      plan the scorecard form asks for a link and the reply email collects the file. */
