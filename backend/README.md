@@ -32,4 +32,4 @@ Add a filter on Status and sort by **Reply due** to see what needs answering fir
 ## Limits
 
 - A free Gmail account can send about 100 emails a day; each lead uses two (auto-reply + notice). A Workspace account allows far more.
-- Apps Script can't send from a different address than the account's own unless it's added as a Gmail alias. Once `hello@pihoco.com` exists, run the script from that account or add it as an alias.
+- Apps Script can't send from a different address than the account's own unless it's added as a Gmail alias. To send auto-replies from `contact@pihoco.com`, run the script from that account (if it's a Google Workspace mailbox) or add it as a Gmail alias.

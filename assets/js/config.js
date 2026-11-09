@@ -2,9 +2,8 @@
    PIHOCO — site settings. Edit this file, not the pages.
    ========================================================= */
 window.PIHOCO = {
-  /* Where enquiries go and the address shown on the site.
-     Switch to the domain address (e.g. hello@pihoco.com) as soon as it receives mail. */
-  email: 'raaikwaarpiyush@gmail.com',
+  /* Where enquiries go and the address shown on the site. */
+  email: 'contact@pihoco.com',
 
   /* Google Apps Script web-app URL (see backend/README.md).
      Empty = forms fall back to opening the visitor's email app. */

@@ -318,7 +318,7 @@
 
   /* ---------- Site settings (assets/js/config.js) ---------- */
   var CFG = window.PIHOCO || {};
-  var EMAIL = CFG.email || 'raaikwaarpiyush@gmail.com';
+  var EMAIL = CFG.email || 'contact@pihoco.com';
   $$('[data-email-link]').forEach(function (a) { a.href = 'mailto:' + EMAIL; a.textContent = EMAIL; });
   if (CFG.bookingUrl) {
     $$('[data-booking]').forEach(function (el) { el.hidden = false; });

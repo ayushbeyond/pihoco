@@ -12,8 +12,8 @@
 var SETTINGS = {
   sheetName: 'Leads',
   driveFolderName: 'PIHOCO — Scorecard menus',
-  notifyTo: 'raaikwaarpiyush@gmail.com',      // who gets the "new lead" email
-  replyTo: 'raaikwaarpiyush@gmail.com',       // switch to the domain address once live
+  notifyTo: 'contact@pihoco.com',      // who gets the "new lead" email
+  replyTo: 'contact@pihoco.com',
   senderName: 'Piyush Raikwar · PIHOCO',
   site: 'https://pihoco.com',
   bookingUrl: ''                              // optional: added to the enquiry auto-reply
