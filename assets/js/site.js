@@ -5,7 +5,20 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
-  var money = function (v) { return '£' + v.toFixed(2); };
+  /* Display currency for the illustrative menus. Sample data is written in GBP and converted
+     at round illustrative rates; prices are rounded the way menus in each market are written. */
+  var FX = {
+    GBP: { sym: '£',    rate: 1,   round: 0.5, step: 0.5, dec: 2, small: '50p' },
+    AED: { sym: 'AED ', rate: 4.7, round: 1,   step: 2,   dec: 0 },
+    SGD: { sym: 'S$',   rate: 1.7, round: 0.5, step: 1,   dec: 2 },
+    USD: { sym: '$',    rate: 1.3, round: 0.5, step: 1,   dec: 2 }
+  };
+  var cx = FX.GBP;
+  var conv = function (v) { return Math.round(v * cx.rate / cx.round) * cx.round; };
+  var convCost = function (v) { return Math.round(v * cx.rate * 100) / 100; };
+  var num = function (v) { return cx.dec ? v.toFixed(2) : String(Math.round(v)); };
+  var money = function (v) { return cx.sym + num(v); };
+  var smallStep = function () { return cx.small || money(cx.step); };
 
   /* ---------- Smooth scroll ---------- */
   var lenis = null;
@@ -114,11 +127,12 @@
     { id: 'risotto', name: 'Mushroom Risotto',      n: 120, price: 15.50, cost: 3.40, note: 'Strong margin. Par-cook the base, then feature it.' },
     { id: 'club', lab: 'left',    name: 'Club Sandwich',         n: 160, price: 13.00, cost: 5.80, note: 'Spec has drifted. Re-cost before repricing.' },
     { id: 'croq', lab: 'right',    name: 'Short Rib Croquettes',  n: 90,  price: 9.50,  cost: 3.60, note: 'Labour-heavy and rarely ordered. Specials or retire.' },
-    { id: 'caesar',  name: 'Caesar Salad',          n: 230, price: 11.50, cost: 3.20, note: 'Just below the line — try +£1.00 and watch it cross.' },
+    { id: 'caesar',  name: 'Caesar Salad',          n: 230, price: 11.50, cost: 3.20, note: 'Just below the line — try {two-steps} more and watch it cross.' },
     { id: 'bao', lab: 'below',     name: 'Pork Belly Bao',        n: 85,  price: 10.00, cost: 4.20, note: 'Low on both. Retiring it frees a station.' },
     { id: 'stp',     name: 'Sticky Toffee Pudding', n: 260, price: 8.50,  cost: 1.70, note: 'Popular finish, thin margin. Portion or pairing.' }
   ];
-  MENU.forEach(function (d) { d.base = d.price; });
+  MENU.forEach(function (d) { d.gbp = d.price; d.gbpCost = d.cost; d.base = d.price; });
+  function priceMenu() { MENU.forEach(function (d) { d.price = d.base = conv(d.gbp); d.cost = convCost(d.gbpCost); }); }
   var Q = { star: ['Star', 'Protect it.'], plow: ['Plowhorse', 'Re-cost it.'], puzzle: ['Puzzle', 'Promote it.'], dog: ['Dog', 'Rework or retire it.'] };
 
   function analyse() {
@@ -145,7 +159,7 @@
       var st = analyse();
       var xMax = Math.max(0.18, Math.max.apply(null, MENU.map(function (d) { return d.mix; })) * 1.12);
       var cms = MENU.map(function (d) { return d.cm; });
-      var y0 = 2, y1 = Math.max(20, Math.ceil(Math.max.apply(null, cms) + 1.5));
+      var y0 = 2 * cx.rate, y1 = Math.max(20 * cx.rate, Math.ceil(Math.max.apply(null, cms) + 1.5 * cx.rate));
       var X = function (v) { return v / xMax * 100; }, Y = function (v) { return (v - y0) / (y1 - y0) * 100; };
       vEl.style.left = X(st.thr) + '%'; hEl.style.bottom = Y(st.avg) + '%';
       MENU.slice().sort(function (a, b) { return b.n - a.n; }).forEach(function (d) {
@@ -168,22 +182,23 @@
           '<div><dt>Price</dt><dd>' + money(s.price) + '</dd></div>' +
           '<div><dt>Contribution</dt><dd>' + money(s.cm) + '</dd></div>' +
         '</dl>' +
-        '<p class="ins__move"><strong>' + Q[s.q][1] + '</strong> ' + s.note + '</p>' +
-        '<div class="ins__price"><span class="stepper"><button type="button" data-p="-0.5" aria-label="Lower price by 50p">−</button><output>' + money(s.price) + '</output><button type="button" data-p="0.5" aria-label="Raise price by 50p">+</button></span>' +
+        '<p class="ins__move"><strong>' + Q[s.q][1] + '</strong> ' + s.note.replace('{two-steps}', money(cx.step * 2)) + '</p>' +
+        '<div class="ins__price"><span class="stepper"><button type="button" data-p="-1" aria-label="Lower price by ' + smallStep() + '">−</button><output>' + money(s.price) + '</output><button type="button" data-p="1" aria-label="Raise price by ' + smallStep() + '">+</button></span>' +
         (changed ? '<button type="button" class="ins__reset" data-reset>Reset</button>' : '') + '</div>' +
         '<p class="ins__hint">Sales held constant for illustration. In practice, price moves are tested, then measured.</p>';
     }
     insp.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       var s = byId(sel);
-      if (b.hasAttribute('data-p')) s.price = clamp(Math.round((s.price + parseFloat(b.getAttribute('data-p'))) * 100) / 100, s.cost + 0.5, s.base + 6);
+      if (b.hasAttribute('data-p')) s.price = clamp(Math.round((s.price + parseFloat(b.getAttribute('data-p')) * cx.step) * 100) / 100, s.cost + cx.step, s.base + 12 * cx.step);
       else if (b.hasAttribute('data-reset')) s.price = s.base;
       var key = b.getAttribute('data-p');
       render();
-      var again = key ? $('[data-p="' + key + '"]', insp) : $('[data-p="0.5"]', insp);
+      var again = key ? $('[data-p="' + key + '"]', insp) : $('[data-p="1"]', insp);
       if (again) again.focus();
     });
-    render();
+    priceMenu(); render();
+    window.addEventListener('pihoco:cur', function () { priceMenu(); render(); });
   }
 
   /* ---------- Menu X-ray (illustrative) ---------- */
@@ -225,13 +240,22 @@
         li.setAttribute('data-id', id);
         li.innerHTML = '<p class="dish__rec">Chef’s recommendation</p>' +
           '<div class="dish__row"><span class="dish__name">' + d.n + '</span><span class="dish__lead"></span><span class="dish__price">' +
-          (d.np ? '<span class="dish__old">' + d.p.toFixed(2) + '</span>' : '') + '<span class="dish__now">' + d.p.toFixed(2) + '</span></span></div>' +
+          (d.np ? '<span class="dish__old"></span>' : '') + '<span class="dish__now"></span></span></div>' +
           '<p class="dish__desc">' + d.d + '</p>' +
-          '<p class="dish__tag"><i class="k k--' + d.q + '"></i><b data-t>' + QN[d.q] + '</b><em>£' + d.c.toFixed(2) + ' contribution</em></p>';
+          '<p class="dish__tag"><i class="k k--' + d.q + '"></i><b data-t>' + QN[d.q] + '</b><em data-c></em></p>';
         ul.appendChild(li);
       });
     });
+    var paintDish = function (li, state) {
+      var d = D[li.getAttribute('data-id')];
+      $('[data-t]', li).textContent = state === 'eng' ? d.a + (d.np ? ' ' + money(conv(d.np)) : '') : QN[d.q];
+      $('.dish__now', li).textContent = num(conv(state === 'eng' && d.np ? d.np : d.p));
+      if (d.np) $('.dish__old', li).textContent = num(conv(d.p));
+      $('[data-c]', li).textContent = money(convCost(d.c)) + ' contribution';
+    };
     var xState = 'menu', userTouched = false;
+    $$('.dish', card).forEach(function (li) { paintDish(li, 'menu'); });
+    window.addEventListener('pihoco:cur', function () { $$('.dish', card).forEach(function (li) { paintDish(li, xState); }); });
     var setX = function (state) {
       if (state === xState) return;
       var lis = $$('.dish', card), first = {};
@@ -243,8 +267,7 @@
       });
       lis.forEach(function (li) {
         var id = li.getAttribute('data-id'), d = D[id];
-        $('[data-t]', li).textContent = state === 'eng' ? d.a + (d.np ? ' £' + d.np.toFixed(2) : '') : QN[d.q];
-        if (d.np) $('.dish__now', li).textContent = (state === 'eng' ? d.np : d.p).toFixed(2);
+        paintDish(li, state);
         if (reduce) return;
         var dy = first[id] - li.getBoundingClientRect().top;
         if (dy) {
@@ -336,6 +359,10 @@
     });
     $$('[data-cur]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-cur') === c)); });
     try { localStorage.setItem('pihoco-cur', c); } catch (e) {}
+    cx = FX[c] || FX.USD;
+    $$('[data-cur-small]').forEach(function (el) { el.textContent = smallStep(); });
+    $$('[data-country]').forEach(function (sel) { sel.value = c; });
+    window.dispatchEvent(new CustomEvent('pihoco:cur', { detail: c }));
   }
   var cur = null;
   try { cur = localStorage.getItem('pihoco-cur'); } catch (e) {}
@@ -345,6 +372,7 @@
   }
   setCur(cur);
   $$('[data-cur]').forEach(function (b) { b.addEventListener('click', function () { setCur(b.getAttribute('data-cur')); }); });
+  $$('[data-country]').forEach(function (sel) { sel.addEventListener('change', function () { setCur(sel.value); }); });
 
   /* Buttons that pre-select what the visitor wants in the enquiry form */
   $$('[data-interest]').forEach(function (a) {
