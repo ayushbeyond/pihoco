@@ -5,6 +5,14 @@ window.PIHOCO = {
   /* Where enquiries go and the address shown on the site. */
   email: 'contact@pihoco.com',
 
+  /* Web3Forms access key (web3forms.com). When set, every form is emailed to the
+     address the key was created for. Takes priority over `endpoint`. */
+  web3formsKey: '',
+
+  /* true only on a Web3Forms paid plan: shows the menu upload button. On the free
+     plan the scorecard form asks for a link and the reply email collects the file. */
+  allowUpload: false,
+
   /* Google Apps Script web-app URL (see backend/README.md).
      Empty = forms fall back to opening the visitor's email app. */
   endpoint: '',

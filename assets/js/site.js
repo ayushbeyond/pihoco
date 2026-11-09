@@ -390,10 +390,29 @@
   function sendLead(payload) {
     payload.page = location.pathname; payload.referrer = document.referrer || ''; payload.utm = utm;
     payload.currency = (function () { try { return localStorage.getItem('pihoco-cur') || ''; } catch (e) { return ''; } })();
+    if (CFG.web3formsKey) return sendWeb3(payload);
     if (!CFG.endpoint) return Promise.reject('no-endpoint');
     return fetch(CFG.endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json(); })
       .then(function (j) { if (!j || !j.ok) throw new Error((j && j.error) || 'failed'); return j; });
+  }
+  /* Web3Forms (web3forms.com): emails each submission to the address the access key was made for. */
+  var LABEL = { scorecard: 'Free scorecard request', enquiry: 'Enquiry', check: '60-second check result' };
+  function sendWeb3(d) {
+    var fd = new FormData();
+    fd.append('access_key', CFG.web3formsKey);
+    fd.append('subject', '[PIHOCO] ' + LABEL[d.type] + (d.business ? ' — ' + d.business : ''));
+    fd.append('from_name', 'pihoco.com');
+    var rows = [['Type', LABEL[d.type]], ['Name', d.name], ['Business', d.business], ['Venue', d.venue], ['City', d.city],
+      ['Interested in', d.interest], ['Menu link', d.menuLink], ['Message', d.message],
+      ['Check score', d.score === undefined ? '' : d.score + ' of 5'], ['Fixes sent', (d.fixes || []).join(' | ')],
+      ['Currency shown', d.currency], ['Page', d.page], ['Came from', d.referrer], ['Campaign', Object.keys(d.utm || {}).map(function (k) { return k + '=' + d.utm[k]; }).join(', ')]];
+    rows.forEach(function (r) { if (r[1] !== undefined && r[1] !== '') fd.append(r[0], String(r[1])); });
+    if (d.email) fd.append('email', d.email); // Web3Forms uses this as reply-to
+    if (d._file && CFG.allowUpload) fd.append('attachment', d._file);
+    return fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: fd })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j || !j.success) throw new Error((j && j.message) || 'failed'); return j; });
   }
   function mailFallback(subject, lines) {
     window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
@@ -409,6 +428,10 @@
     });
   }
 
+  /* Upload only when the form service accepts files */
+  var uploadsOn = CFG.web3formsKey ? !!CFG.allowUpload : true;
+  if (!uploadsOn) $$('.file').forEach(function (el) { el.hidden = true; });
+  $$('[data-upload-note]').forEach(function (el) { el.hidden = uploadsOn; });
   /* File picker label */
   $$('[data-file]').forEach(function (inp) {
     inp.addEventListener('change', function () {
@@ -434,18 +457,20 @@
       var d = {}; new FormData(form).forEach(function (v, k) { if (typeof v === 'string') d[k] = v.trim(); });
       if (d.website) return; // honeypot
       var fileInput = $('[data-file]', form), file = fileInput && fileInput.files && fileInput.files[0];
-      if (type === 'scorecard' && !file && !d.menuLink) { say('is-error', 'Add a link to your menu or upload it.'); $('#s-link').focus(); return; }
+      if (type === 'scorecard' && uploadsOn && !file && !d.menuLink) { say('is-error', 'Add a link to your menu or upload it.'); $('#s-link').focus(); return; }
 
       btn.disabled = true; say('', 'Sending…');
       readFile(file).then(function (f) {
         var payload = Object.assign({ type: type }, d); delete payload.website;
         if (f) payload.file = f;
+        if (file) payload._file = file;
+        if (CFG.web3formsKey) delete payload.file;
         return sendLead(payload);
       }).then(function () {
         form.reset(); if (fileInput) fileInput.dispatchEvent(new Event('change'));
         say('is-ok', type === 'scorecard'
-          ? 'Thank you — your menu is with us. Check your inbox for a confirmation; your scorecard follows within two working days.'
-          : 'Thank you — we’ve received your enquiry and sent a confirmation to your inbox.');
+          ? (d.menuLink || file ? 'Thank you — your menu is with us. Your scorecard follows by email within two working days.' : 'Thank you — we’ll email you shortly. Reply with a photo or PDF of the menu and your scorecard follows within two working days.')
+          : 'Thank you — we’ve received your enquiry and will reply within one working day.');
       }).catch(function (err) {
         if (err === 'too-big') { say('is-error', 'That file is over 8 MB. Please send a link or a smaller file.'); return; }
         if (err === 'no-endpoint') {
@@ -474,7 +499,7 @@
       var r = window.PIHOCO_CHECK || {};
       cSend.disabled = true; cSay('', 'Sending…');
       sendLead({ type: 'check', email: v, score: r.score, answers: r.answers, fixes: r.fixes })
-        .then(function () { cBox.classList.add('is-done'); cSay('is-ok', 'Sent. Your result and fixes are on their way to ' + v + '.'); })
+        .then(function () { cBox.classList.add('is-done'); cSay('is-ok', 'Thanks. We’ll email your result and fixes to ' + v + ' shortly.'); })
         .catch(function (err) {
           if (err === 'no-endpoint') { mailFallback('My 60-second menu check: ' + r.score + ' of 5 signs', ['Please send me the fixes for my answers.', '', r.summary || '', '', 'Email: ' + v]); cSay('is-ok', 'Your email app should open now.'); }
           else cSay('is-error', 'Something went wrong. Please try again.');
