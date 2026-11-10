@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import {
   parseMenu, runXray, priceCheck, compareKey, matchDish, repriceLever, addonLever, roundMoney, testPrice, refreshItem,
   type BenchmarkRow, type PriceIndexPoint, type XrayInputs,
-} from "../src/engine";
-import { parseOverpass, haversine } from "../src/engine/osm";
-import { endingStyle, median, monthsBetween } from "../src/engine/stats";
+} from "../src/core";
+import { parseOverpass, haversine } from "../src/core/osm";
+import { endingStyle, median, monthsBetween } from "../src/core/stats";
 
 let pass = 0;
 const t = (name: string, fn: () => void) => { try { fn(); pass++; } catch (e) { console.error("FAIL", name); throw e; } };

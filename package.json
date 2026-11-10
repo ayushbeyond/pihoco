@@ -1,0 +1,16 @@
+{
+  "name": "pihoco-xray-engine",
+  "version": "1.0.0",
+  "description": "PIHOCO Menu X-ray: deterministic menu parser, scoring, money levers, price check and OpenStreetMap lookup. No AI.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./core": { "types": "./dist/core/index.d.ts", "import": "./dist/core/index.js" }
+  },
+  "files": ["dist", "src"],
+  "sideEffects": false,
+  "license": "UNLICENSED",
+  "private": true
+}

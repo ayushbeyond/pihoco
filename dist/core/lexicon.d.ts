@@ -1,0 +1,22 @@
+import type { Concept, Country, Currency, Section } from "./types";
+export declare const COUNTRY_CURRENCY: Record<Country, Currency>;
+export declare const CURRENCY_SYMBOL: Record<Currency, string>;
+export declare const CURRENCY_TOKENS: [RegExp, Currency][];
+export declare const SECTION_KEYWORDS: [Section, RegExp][];
+export declare const FOOD_SECTIONS: Section[];
+export declare const DRINK_SECTIONS: Section[];
+export declare const CONCEPT_NORMS: Record<Concept, {
+    totalItems: [number, number];
+    perCategory: [number, number];
+    categories: [number, number];
+}>;
+export declare const SENSORY: string[];
+export declare const METHODS: string[];
+export declare const ORIGIN: string[];
+export declare const SIGNATURE_MARKERS: RegExp;
+export declare const DIETARY_MARKERS: RegExp;
+export declare const ADDON_MARKERS: RegExp;
+export declare const COMBO_MARKERS: RegExp;
+export declare const ABBREVIATIONS: [RegExp, string][];
+export declare const STOPWORDS: Set<string>;
+export declare const PROTEINS: [string, RegExp][];
