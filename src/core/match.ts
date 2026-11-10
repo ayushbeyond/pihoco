@@ -1,4 +1,8 @@
-// Dish-name normalisation and fuzzy matching. No dependencies, no AI.
+// Dish-name normalisation and matching. No dependencies, no AI.
+// Rule of thumb: a menu item matches a dictionary dish when every word of the dish name
+// (or an alias) is in the item's name, and the item's extra words don't turn it into a
+// different product (a roll, a cake, an iced or Spanish version...). Typos are caught by a
+// strict whole-string similarity check.
 import { ABBREVIATIONS, PROTEINS, STOPWORDS } from "./lexicon";
 import { DISHES, type Dish } from "./dishes";
 
@@ -37,18 +41,54 @@ export function dice(a: string, b: string): number {
   return (2 * inter) / total;
 }
 
-/** Similarity of two dish names: best of whole-string Dice and token overlap. */
-export function similarity(a: string, b: string): number {
-  const na = tokens(a).join(" "), nb = tokens(b).join(" ");
-  if (!na || !nb) return 0;
+/** Words that make an item a different product from the dish it mentions. */
+const FORM_WORDS = new Set([
+  "roll", "rolls", "wrap", "sandwich", "burger", "pizza", "flatbread", "salad", "soup", "biryani", "pulao", "pav",
+  "kulcha", "paratha", "naan", "croissant", "muffin", "cake", "cookie", "cookies", "shake", "milkshake", "smoothie",
+  "frappe", "latte", "tea", "juice", "soda", "lemonade", "bowl", "pasta", "fries", "chaat", "sauce", "combo",
+  "platter", "thali", "meal", "box", "toastie", "panini", "bagel", "taco", "tacos", "noodles", "rice", "curry",
+  "masala", "tikka", "kebab", "shawarma", "pudding", "bhature", "fatteh", "fattah", "manakeesh", "pie", "fatayer", "omelette", "waffle", "pancakes",
+  "macchiato", "cortado", "mocha", "affogato", "tonic", "mojito", "plate", "sizzler", "kadhi", "bhurji", "chilli",
+]);
+/** Words that make it a priced variant (iced, flavoured, double...). */
+const VARIANT_WORDS = new Set([
+  "iced", "ice", "cold", "frozen", "spanish", "chai", "matcha", "vanilla", "caramel", "hazelnut", "rose", "saffron",
+  "pistachio", "lotus", "karak", "double", "triple", "mango", "strawberry", "chocolate", "nutella", "almond",
+  "zaatar", "truffle", "dirty", "white", "ube", "date", "honey", "turkish", "arabic", "salted", "peanut", "oreo",
+  "meat", "jumbo", "family", "mini", "large", "small", "big", "half", "full", "kids", "protein", "keto", "vegan",
+]);
+
+function tokenEq(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (a.length >= 5 && b.length >= 5) return dice(a, b) >= 0.8; // typos: "tikkah", "biriyani"
+  return false;
+}
+
+/**
+ * How well a menu item name matches a reference dish name/alias, 0–1.
+ * 0 when the item contains the reference but is a different product or variant.
+ */
+export function matchScore(item: string, ref: string): number {
+  const a = tokens(item), b = tokens(ref);
+  if (!a.length || !b.length) return 0;
+  const na = a.join(" "), nb = b.join(" ");
   if (na === nb) return 1;
-  const ta = new Set(na.split(" ")), tb = new Set(nb.split(" "));
-  let common = 0;
-  for (const w of ta) if (tb.has(w)) common++;
-  const overlap = common / Math.max(ta.size, tb.size);
-  // containment: "butter chicken" inside "house butter chicken bowl"
-  const contained = (na.includes(nb) || nb.includes(na)) ? 0.9 * Math.min(na.length, nb.length) / Math.max(na.length, nb.length) + 0.1 : 0;
-  return Math.max(dice(na, nb), overlap, contained);
+  const unmatched = a.filter((w) => !b.some((r) => tokenEq(w, r)));
+  const covered = b.every((r) => a.some((w) => tokenEq(w, r)));
+  if (covered) {
+    if (unmatched.some((w) => FORM_WORDS.has(w) || VARIANT_WORDS.has(w))) return 0;
+    if (unmatched.length > Math.max(2, b.length)) return 0.6; // too much else going on
+    return 0.8 + 0.2 * (b.length / a.length);
+  }
+  // typo fallback: same number of words, nearly the same letters
+  if (a.length !== b.length) return 0;
+  const d = dice(na, nb);
+  return d >= 0.86 ? d : 0;
+}
+
+/** Symmetric similarity for comparing two menus' item names (price check). */
+export function similarity(a: string, b: string): number {
+  return Math.max(matchScore(a, b), matchScore(b, a));
 }
 
 interface Candidate { label: string; dish: Dish }
@@ -67,11 +107,12 @@ function index(): Candidate[] {
 export interface DishMatch { dish: Dish; score: number }
 
 /** Best dictionary dish for a menu item name, or null under the threshold. */
-export function matchDish(name: string, threshold = 0.62): DishMatch | null {
+export function matchDish(name: string, threshold = 0.8): DishMatch | null {
   let best: DishMatch | null = null;
   for (const c of index()) {
-    const s = similarity(name, c.label);
-    if (!best || s > best.score) best = { dish: c.dish, score: s };
+    const s = matchScore(name, c.label);
+    // prefer the longer (more specific) label on ties: "chicken tikka masala" over "chicken tikka"
+    if (s > 0 && (!best || s > best.score || (s === best.score && c.label.length > best.dish.name.length))) best = { dish: c.dish, score: s };
   }
   return best && best.score >= threshold ? best : null;
 }

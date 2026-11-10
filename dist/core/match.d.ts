@@ -3,7 +3,12 @@ export declare function normalise(s: string): string;
 export declare function tokens(s: string): string[];
 /** Sørensen–Dice coefficient on character bigrams, 0–1. */
 export declare function dice(a: string, b: string): number;
-/** Similarity of two dish names: best of whole-string Dice and token overlap. */
+/**
+ * How well a menu item name matches a reference dish name/alias, 0–1.
+ * 0 when the item contains the reference but is a different product or variant.
+ */
+export declare function matchScore(item: string, ref: string): number;
+/** Symmetric similarity for comparing two menus' item names (price check). */
 export declare function similarity(a: string, b: string): number;
 export interface DishMatch {
     dish: Dish;

@@ -10,6 +10,7 @@ import Review from "./pages/review";
 import Result from "./pages/result";
 import PriceCheck from "./pages/price-check";
 import SharedResult from "./pages/shared";
+import PriceIndex from "./pages/price-index";
 
 function ScrollTop() {
   const { pathname } = useLocation();
@@ -33,6 +34,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/result" element={<Result />} />
           <Route path="/price-check" element={<PriceCheck />} />
           <Route path="/x/:id" element={<SharedResult />} />
+          <Route path="/price-index" element={<PriceIndex />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </XrayProvider>

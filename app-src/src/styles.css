@@ -88,6 +88,11 @@ button,input,select,textarea{font:inherit;color:inherit;border-radius:0}
 .promise h3{font-size:1.4rem;margin:10px 0 6px}
 .promise p{font-size:14px;color:var(--muted)}
 
+.dataline{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 28px;border-top:1px solid var(--ink);padding:24px 0 28px;margin-bottom:8px}
+.dataline b{display:block;font:300 clamp(2rem,1.6rem + 1.6vw,2.8rem)/1 var(--serif)}
+.dataline .label{display:block;margin-top:8px}
+.dataline .hint{grid-column:1/-1;margin:0}
+
 /* page heads */
 .head{padding-top:clamp(40px,7vw,80px);padding-bottom:8px}
 .head h1{font-size:clamp(2.2rem,1.6rem + 2.6vw,3.6rem);line-height:1.05;margin-top:14px}

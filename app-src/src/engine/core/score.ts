@@ -164,11 +164,16 @@ export interface DishComparison { item: string; price: number; key: string; n: n
 
 export function compareToBenchmark(items: MenuItem[], rows: BenchmarkRow[], inputs: XrayInputs, minObs = MIN_BENCHMARK_OBS): DishComparison[] {
   const city = inputs.city.trim().toLowerCase();
-  const byKey = new Map<string, number[]>();
-  for (const r of rows) {
-    if (r.city.trim().toLowerCase() !== city) continue;
-    const a = byKey.get(r.dish_key) ?? []; a.push(r.price); byKey.set(r.dish_key, a);
-  }
+  // one price per source menu per dish (its lowest, i.e. the regular size), so "5 menus" means 5 menus
+  const perMenu = new Map<string, Map<string, number>>();
+  rows.forEach((r, i) => {
+    if (r.city.trim().toLowerCase() !== city) return;
+    const src = r.source_url ?? `row${i}`;
+    const m = perMenu.get(r.dish_key) ?? new Map<string, number>();
+    m.set(src, Math.min(m.get(src) ?? Infinity, Number(r.price)));
+    perMenu.set(r.dish_key, m);
+  });
+  const byKey = new Map<string, number[]>([...perMenu].map(([k, m]) => [k, [...m.values()]]));
   const out: DishComparison[] = [];
   for (const it of items) {
     if (it.price == null) continue;
@@ -188,7 +193,8 @@ export function priceDrift(points: PriceIndexPoint[], inputs: XrayInputs, now = 
   if (!inputs.lastPriceChange) return null;
   const series = points.filter((p) => p.country === inputs.country).sort((a, b) => a.month.localeCompare(b.month));
   if (series.length < 2) return null;
-  const from = [...series].reverse().find((p) => p.month <= inputs.lastPriceChange!) ?? null;
+  // last change before the series starts → measure from the first point (understates, never overstates)
+  const from = [...series].reverse().find((p) => p.month <= inputs.lastPriceChange!) ?? series[0];
   const to = [...series].reverse().find((p) => p.month <= now) ?? null;
   if (!from || !to || from.month === to.month) return null;
   return { drift: to.value / from.value - 1, from: from.month, to: to.month, months: monthsBetween(from.month, to.month) };

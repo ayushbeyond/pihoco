@@ -1,0 +1,591 @@
+# PIHOCO price index seed: public Dubai menus, collected 2026-11-10 from each restaurant's own website.
+# Format: "## Restaurant | area | concept | source url" then "Item | price" (AED, dine-in, first price where sizes differ).
+# Excluded: shisha, chocolate boxes/trays, 1-litre bottles, whole cakes, seasonal iftar boxes.
+
+## Patiala House | Dubai | restaurant | https://patialahouse.ae/menu
+Mango Lassi | 12
+Plain Lassi | 12
+Masala Chaas | 12
+Patiala Chaat | 17
+Pani Puri | 10
+Bhel Puri | 13
+Sev Puri | 13
+Dahi Batata Puri | 13
+Raj Kachodi | 16
+Dahi Bhalla | 15
+Aloo Tikki Choley | 13
+Samosa Chaat | 13
+Vada Pav | 9
+Samosa Pav | 9
+Samosa | 5
+Chole Bhature | 27
+Veg Kathi Roll | 21
+Paneer Tikka Roll | 21
+Chicken Tikka Roll | 23
+Chicken Seekh Kabab Roll | 23
+Mutton Seekh Kabab Roll | 24
+Veg Thali | 34
+Non Veg Thali | 34
+Hara Bhara Kabab | 26
+Mushroom Tikka | 32
+Paneer Tikka | 32
+Paneer Malai Tikka | 34
+Tandoori Broccoli | 33
+Vegetable Seekh Kabab | 28
+French Fries | 14
+Soya Chaap | 29
+Chicken Tikka | 34
+Chicken Reshmi Malai Tikka | 35
+Chicken Haryali Tikka | 35
+Tandoori Chicken (Half) | 34
+Mutton Seekh Kabab | 36
+Lamb Chops | 41
+Amritsari Fish Tikka | 37
+Tandoori Butter Garlic Prawns | 51
+Paneer Butter Masala | 34
+Sarson ka Saag | 31
+Pakoda Kadhi | 24
+Dal Tadka | 21
+Dal Makhani | 25
+Dal Khichdi | 26
+Chana Masala | 21
+Veg Punjabi Kofta | 33
+Gobi Aloo | 28
+Bhindi Do Pyaza | 27
+Palak Paneer | 31
+Paneer Bhurji | 33
+Paneer Tikka Masala | 33
+Kadai Paneer | 33
+Mushroom Mutter | 32
+Butter Chicken | 34
+Chicken Tikka Masala | 33
+Chicken Methi Garlic | 36
+Palak Chicken | 32
+Bhuna Gosht | 42
+Mutton Kadai | 36
+Palak Mutton | 38
+Mutton Rogan Josh | 41
+Prawn Masala | 48
+Fish Methi Garlic | 45
+Egg Masala Curry | 31
+Veg Manchurian | 33
+Paneer Chilli | 33
+Gobi Manchurian | 33
+Chicken Manchurian | 35
+Chilli Chicken | 37
+Veg Hakka Noodles | 32
+Chicken Hakka Noodles | 36
+Vegetable Fried Rice | 25
+Chicken Fried Rice | 28
+Egg Fried Rice | 28
+Tandoor Roti | 5
+Butter Roti | 6
+Plain Naan | 5
+Butter Naan | 7
+Garlic Naan | 7
+Rumali Roti | 8
+Missi Roti | 8
+Chapati | 5
+Amritsari Kulcha | 15
+Paneer Kulcha | 13
+Lachha Paratha | 8
+Aloo Paratha | 13
+Paneer Paratha | 15
+Chicken Biryani | 28
+Chicken Tikka Biryani | 32
+Mutton Biryani | 34
+Prawns Biryani | 42
+Vegetable Pulao | 20
+Jeera Rice | 18
+Steamed Rice | 16
+Veg Biryani | 24
+Tomato Soup | 19
+Chicken Soup | 19
+Veg Hot n Sour Soup | 20
+Chicken Manchow Soup | 22
+Raita | 10
+Green Salad | 18
+Gajar Ka Halwa | 12
+Gulab Jamun | 12
+Rasmalai | 17
+Sweet Lassi | 15
+Nimbu Pani | 11
+Soft Drink | 9
+Water | 5
+Fresh Lime Soda | 11
+Filter Coffee | 5
+
+## Indego by Vineet | Dubai Marina | restaurant | https://www.indegobyvineet.com/our-menus
+Chaat Trilogy | 95
+Chandani Chowk Paneer | 95
+Dilli Samosa Chaat | 85
+Malai Mirch Broccoli | 95
+King Crab Duo | 175
+Coastal Scallops | 165
+Sambhar Prawns | 155
+Charcoal Salmon | 145
+Thecha Chicken Tikka | 135
+Kashmiri Chicken Tikka | 135
+Frontier Seekh | 125
+Jungli Lamb Chops | 195
+Ambarsari Cauliflower | 125
+Grilled Ginger Lobster | 315
+Chicken Maharani | 155
+Lamb Shank Rogan Josh | 195
+Kaapi Wagyu | 325
+Spinach Saag Bharwan Paneer | 115
+Mushroom Walnut Keema | 105
+Dal Maharani | 85
+Alleppey Fish Curry | 175
+Coconut Lime Prawns | 175
+Butter Chicken | 155
+Ghee Roast Chicken | 155
+Lamb Morel Korma | 185
+Dum Parda Chicken Biryani | 165
+Lamb Biryani | 185
+Vegetable Biryani | 145
+Saffron Pulao | 45
+Kachumber Raita | 25
+Peshawari Naan | 35
+Cheese Naan | 35
+Garlic Coriander Naan | 25
+Paratha | 25
+Missi Roti | 25
+
+## Shamiat Restaurant | Dubai | restaurant | https://shamiatrestaurant.com/menu/
+Fattoush | 29
+Tabbouleh | 29
+Rocca Salad | 27
+Arabic Salad | 26
+Yalanji | 24
+Hummus | 23
+Hummus with Meat | 36
+Mutabal | 24
+Baba Ghanouj | 23
+Muhammara | 24
+Fried Kibbeh | 27
+Falafel | 29
+Lentil Soup | 20
+Chicken Soup | 20
+Mushroom Soup | 20
+Fattah | 39
+Foul | 29
+Lamb Chops | 99
+Lamb Shank | 90
+Mixed Grill | 83
+Shish Tawook | 57
+Kabab Halaby | 58
+Half Grilled Chicken | 39
+Kibbeh Grilled | 49
+Sirloin Steak | 99
+Grilled Salmon | 95
+Grilled Shrimp | 109
+Musakhan Chicken | 56
+Mansaf | 65
+Shish Barak | 60
+Grilled Halloumi | 39
+Zaatar Manakeesh | 12
+Cheese Manakeesh | 21
+Labneh Manakeesh | 19
+Beef Burger | 33
+Chicken Shawarma Sandwich | 22
+Tawook Sandwich | 25
+Zinger | 23
+Falafel Sandwich | 21
+Margherita Pizza | 35
+Pepperoni Pizza | 45
+Kunafa | 25
+Rice Pudding | 16
+Orange Juice | 20
+Watermelon Juice | 20
+Lemon Mint | 18
+Ayran | 14
+Cappuccino | 16
+Cafe Latte | 16
+Espresso | 12
+Tea | 10
+
+## Al Beiruti | Dubai | restaurant | https://www.albeiruti.com/menu/uae
+Eggs Your Way | 32
+Shakshuka | 47
+Labneh | 29
+Shanklish | 35
+Hummus Fatteh | 38
+Grilled Halloumi | 46
+Foul Medammas | 33
+Zaatar Manakeesh | 24
+Cheese and Zaatar Manakeesh | 29
+Lahem Bi Ajin | 34
+Spinach Fatayer | 32
+Margherita Pizza | 40
+Fattoush | 35
+Tabbouleh | 35
+Chicken Caesar Salad | 48
+Lentil Soup | 28
+Creamy Tomato Soup | 28
+Mushroom Soup | 32
+Hummus | 32
+Hummus with Pine Nuts | 39
+Moutabbal | 33
+Baba Ghanouj | 34
+Mouhammara | 37
+Vine Leaves | 38
+Fried Kebbe | 34
+Beef Sambousik | 34
+Falafel | 35
+French Fries | 32
+Fried Calamari | 57
+Grilled Halloumi | 46
+Shish Tawouk | 64
+Grilled Meat | 94
+Lamb Chops | 136
+Grilled Kafta | 68
+Grilled Chicken Wings | 58
+Grilled Boneless Half Chicken | 78
+Mixed Grill | 94
+Chicken Shawarma Plate | 52
+Beef Shawarma Plate | 64
+Lebanese Burger | 56
+Grilled Chicken Burger | 54
+Chicken Escalope | 62
+Beef Steak | 106
+Grilled Salmon | 120
+Penne Alfredo | 56
+Penne Arrabbiata | 50
+Lasagna | 75
+Tiramisu | 54
+Cheese Kunafa | 52
+Umm Ali | 48
+Chocolate Fondant | 48
+Rice Pudding | 38
+Ice Cream | 36
+Soft Drink | 18
+Water | 12
+Iced Tea Peach | 28
+Ayran | 26
+Orange Juice | 32
+Lemonade | 32
+Minted Lemonade | 32
+Watermelon Juice | 36
+Mango Juice | 38
+Lebanese Coffee | 26
+Espresso | 22
+Double Espresso | 29
+Cappuccino | 32
+Cafe Latte | 32
+Spanish Latte | 34
+Americano | 32
+Macchiato | 24
+Flat White | 32
+Hot Chocolate | 30
+Tea | 22
+
+## ROAST | Dubai Marina | cafe | https://www.roastdubai.com/coffee-prices-dubai-roast.html
+Espresso | 12
+Doppio | 16
+Americano | 16
+Cappuccino | 18
+Cafe Latte | 18
+Flat White | 20
+Cortado | 20
+Turkish Coffee | 22
+Karak Chai | 14
+Iced Americano | 18
+Iced Latte | 20
+Iced Spanish Latte | 22
+Iced Cappuccino | 22
+Cold Brew | 24
+Iced Caramel Latte | 26
+
+## Nostalgia | Dubai | cafe | https://nostalgia.ae/menus/
+French Toast | 55
+Avocado Toast | 50
+Eggs Benedict | 45
+Turkish Eggs | 54
+Shakshuka | 46
+The Big Breakfast | 65
+Yoghurt Bowl | 46
+Acai Bowl | 44
+Beef Burger | 65
+Chicken Burger | 65
+Chicken Alfredo Pasta | 60
+Fries | 18
+Espresso | 21
+Long Black | 21
+V60 | 40
+Cold Brew | 40
+Flat White | 28
+Cappuccino | 28
+Latte | 28
+Iced Latte | 28
+Piccolo | 24
+Affogato | 38
+Cortado | 24
+Hot Karak Latte | 30
+Hot Matcha Latte | 30
+Iced Matcha Latte | 30
+Strawberry Matcha | 36
+Mango Smoothie | 40
+Orange Juice | 20
+Coca-Cola | 12
+Hot Chocolate | 25
+Vanilla Milkshake | 40
+Hot Tea | 20
+Pain Au Chocolat | 18
+Cheese Croissant | 18
+Zaatar Croissant | 18
+Plain Croissant | 16
+Tiramisu | 30
+Bread Pudding | 40
+Banana Loaf | 24
+Classic Brownie | 10
+
+## Kap's Cafe | Al Kifaf | cafe | https://www.kapscafe.ae/menu?menu=drinks
+Classic Mojito | 35
+Strawberry Mojito | 38
+Espresso | 19
+Espresso Macchiato | 21
+Americano | 20
+Flat White | 26
+Latte | 26
+Cappuccino | 26
+Cortado | 24
+Piccolo | 23
+Spanish Cortado | 25
+Spanish Latte | 30
+Matcha Latte | 36
+Hot Chocolate | 35
+Iced Matcha | 40
+Iced Mocha | 35
+Strawberry Matcha | 42
+Iced Americano | 25
+Lemon Mint | 28
+Masala Chai | 20
+English Breakfast Tea | 35
+Acai Smoothie | 42
+Acai Bowl | 50
+
+## Carluccio's | Downtown Dubai | cafe | https://carlucciosme.com/menu/the-dubai-mall/coffee/
+Cappuccino | 26
+Flat White | 26
+Espresso | 18
+Double Espresso | 21
+Caffe Latte | 26
+Spanish Latte | 31
+Macchiato | 21
+Americano | 26
+
+## Ciora Cafe | Dubai | cafe | https://cioracafe.ae/menu/
+Espresso | 15
+V60 | 27
+Espresso Macchiato | 18
+Americano | 15
+Latte | 21
+Flat White | 21
+Cappuccino | 21
+Spanish Latte | 21
+Cortado | 18
+Turkish Coffee | 27
+Matcha Latte | 27
+Classic Mojito | 21
+Water | 8
+Hot Chocolate | 25
+Lemon Mint Juice | 18
+Fresh Orange Juice | 18
+Watermelon Juice | 18
+English Breakfast Tea | 18
+English Breakfast | 49
+Turkish Eggs | 39
+Eggs Your Way | 32
+Avocado Toast | 35
+Eggs Benedict | 39
+Granola Bowl | 35
+French Toast | 39
+Maple Pancakes | 35
+Caesar Salad With Chicken | 29
+Penne Arrabbiata | 39
+Chicken Alfredo Pasta | 49
+Margherita Flatbread | 49
+Fries | 21
+Garlic Bread | 15
+
+## 21 Cafe | Deira | cafe | https://21cafes.com/21cafe-menu/
+Espresso | 12
+Double Espresso | 15
+Espresso Macchiato | 15
+Hot Chocolate | 18
+Indian Filter Coffee | 7
+Americano | 17
+Flat White | 17
+Piccolo | 17
+Cortado | 17
+Cappuccino | 18
+Cold Brew | 20
+V60 | 22
+Affogato | 20
+Strawberry Shake | 21
+Chocolate Chip Cookie | 12
+Tiramisu Cake | 22
+New York Cheesecake | 22
+Minted Lemonade | 18
+Fresh Juice | 18
+Peach Iced Tea | 18
+Virgin Mojito | 18
+Plain Croissant | 9
+Almond Croissant | 11
+Chocolate Croissant | 11
+Chicken Sandwich | 25
+Latte | 18
+Spanish Latte | 18
+Matcha Latte | 22
+Cafe Mocha | 22
+
+## Peachbrown | JLT | cafe | https://www.peachbrown.com/menu
+Peachbrown Breakfast | 55
+Acai Bowl | 47
+Shakshuka | 44
+Avocado Toast | 44
+French Toast | 45
+Salmon Eggs Benedict | 55
+Mushroom & Cheese Omelette | 44
+Chicken Caesar Salad | 49
+Greek Salad | 45
+Club Sandwich | 55
+Penne Chicken Alfredo | 55
+Spaghetti Bolognese | 55
+Grilled Salmon | 75
+Grilled Chicken | 65
+Burger | 64
+French Fries | 10
+Espresso | 12
+Double Espresso | 17
+Americano | 19
+Cappuccino | 24
+Latte | 21
+Spanish Latte | 25
+Flat White | 20
+Cafe Mocha | 25
+Matcha Latte | 30
+Hot Chocolate | 25
+Macchiato | 20
+Hot Tea | 18
+Iced Americano | 22
+Iced Latte | 25
+Iced Spanish Latte | 25
+Strawberry Matcha | 32
+Lemon Mint | 25
+Orange Juice | 25
+Banana Cake | 22
+Brownie | 22
+Tiramisu | 25
+Butter Croissant | 15
+Chocolate Croissant | 15
+Almond Croissant | 15
+Chocolate Chip Cookie | 10
+
+## &More by Sheraton | Dubai | cafe | https://www.morecravings.com/en/dubai/venues/link-sheraton-cafe-moe/menu/16095
+Still Water | 25
+Soft Drink | 25
+Fresh Juice | 32
+Espresso | 20
+Double Espresso | 25
+Americano | 25
+Espresso Macchiato | 22
+Cappuccino | 25
+Cafe Latte | 25
+Flat White | 25
+Cortado | 22
+Spanish Latte | 28
+Matcha Latte | 28
+Chai Latte | 28
+Cafe Mocha | 28
+Turkish Coffee | 28
+Iced Latte | 25
+Iced Americano | 25
+Iced Spanish Latte | 28
+Cold Brew | 28
+Affogato | 30
+English Breakfast Tea | 28
+Iced Peach Tea | 25
+Hot Chocolate | 25
+Chocolate Croissant | 20
+Butter Croissant | 20
+Cheese Croissant | 20
+Zaatar Croissant | 20
+Chocolate Muffin | 22
+Chocolate Chip Cookie | 18
+Lotus Cheesecake | 34
+Tiramisu | 34
+Chocolate Fudge Brownie | 34
+Acai Bowl | 42
+Avocado Toast | 42
+Fattoush Salad | 40
+Tuna Poke Bowl | 54
+
+## Easy Day Cafe | Jebel Ali Village | cafe | https://easydaycafe.ae/
+Espresso | 10
+Cortado | 22
+Flat White | 25
+Mocha | 25
+Saffron Latte | 26
+Americano | 20
+Espresso Macchiato | 11
+Cappuccino | 25
+Latte | 26
+Hot Chocolate | 25
+Matcha Latte | 30
+Piccolo | 22
+Spanish Latte | 26
+V60 | 29
+Cold Brew | 30
+Iced Spanish Latte | 27
+Iced Cappuccino | 25
+Iced Americano | 20
+Iced Latte | 26
+Affogato | 21
+Iced Peach Tea | 20
+Classic Lemonade | 20
+Acai Bowl | 30
+Orange Juice | 18
+Classic Mojito | 20
+Vanilla Milkshake | 25
+Coca-Cola | 7
+Karak Tea | 10
+English Breakfast Tea | 10
+Tiramisu Cake | 30
+Eggs Benedict | 35
+Pancake | 26
+Cheese Omelette | 35
+Chicken Alfredo Pasta | 43
+Bolognese Pasta | 40
+Wagyu Burger | 33
+Chicken Burger | 28
+Caesar Salad | 29
+Greek Salad | 27
+Fattoush Salad | 23
+French Fries | 14
+
+## Secret Garden by Ivy | Dubai | cafe | https://www.secretgardenivy.com/gardens-menu/
+Espresso | 18
+Piccolo | 24
+Cortado | 24
+Spanish Cortado | 27
+Affogato | 28
+Americano | 23
+Cappuccino | 25
+Cafe Latte | 25
+Flat White | 25
+Spanish Latte | 28
+Vanilla Latte | 28
+Caramel Latte | 28
+Fresh Orange Juice | 28
+Homemade Lemonade | 28
+V60 | 35
+Classic Mojito | 33
+Chocolate Milkshake | 36
+Matcha Latte | 28
+Black Tea | 21
+Homemade Tiramisu | 30
+San Sebastian Cheesecake | 33
+Homemade Fudge Brownie | 20
+Homemade Cookie | 18

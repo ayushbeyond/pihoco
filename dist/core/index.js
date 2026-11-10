@@ -193,6 +193,10 @@ var ABBREVIATIONS = [
   [/\btikkah\b/g, "tikka"],
   [/\bbiriyani\b|\bbiryanee\b/g, "biryani"],
   [/\bcappucino\b|\bcapuccino\b/g, "cappuccino"],
+  [/\bkabab\b|\bkabob\b/g, "kebab"],
+  [/\btawouk\b|\btaouk\b/g, "tawook"],
+  [/\bdaal\b/g, "dal"],
+  [/\bcaffe\b|\bcaffè\b/g, "cafe"],
   [/\bexpresso\b/g, "espresso"],
   [/\bcroissant\b/g, "croissant"]
 ];
@@ -214,6 +218,9 @@ var STOPWORDS = /* @__PURE__ */ new Set([
   "signature",
   "homemade",
   "served",
+  "cafe",
+  "plain",
+  "regular",
   "w",
   "de",
   "la",
@@ -243,7 +250,7 @@ var ROWS = [
   // ---- North Indian / Indian
   ["butter_chicken", "Butter chicken", "mains", "indian", "murgh makhani|chicken makhani|butter chicken masala", "Tandoor-charred chicken simmered in a silky tomato and butter gravy, finished with cream and dried fenugreek."],
   ["chicken_tikka_masala", "Chicken tikka masala", "mains", "indian", "tikka masala|chicken tikka curry", "Chargrilled chicken tikka folded into a spiced onion-tomato masala with a touch of cream."],
-  ["chicken_tikka", "Chicken tikka", "starters", "indian", "murgh tikka|tikka", "Boneless chicken marinated overnight in yoghurt and spices, charred in the tandoor."],
+  ["chicken_tikka", "Chicken tikka", "starters", "indian", "murgh tikka", "Boneless chicken marinated overnight in yoghurt and spices, charred in the tandoor."],
   ["tandoori_chicken", "Tandoori chicken", "grill", "indian", "tandoori murgh", "Bone-in chicken in a smoky yoghurt-chilli marinade, roasted in the clay oven and finished with lemon."],
   ["seekh_kebab", "Seekh kebab", "grill", "indian", "seekh kabab|lamb seekh|mutton seekh|chicken seekh", "Hand-minced meat with ginger, green chilli and fresh coriander, skewered and cooked over charcoal."],
   ["malai_tikka", "Malai tikka", "starters", "indian", "murgh malai tikka|malai kebab|reshmi kebab", "Chicken in a mild marinade of cream, cheese and cardamom, cooked until just charred at the edges."],
@@ -269,7 +276,7 @@ var ROWS = [
   ["samosa", "Samosa", "starters", "indian", "veg samosa|punjabi samosa|aloo samosa", "Crisp pastry filled with spiced potato and peas, with tamarind and mint chutneys."],
   ["pakora", "Pakora", "starters", "indian", "pakoda|bhaji|onion bhaji|bhajia", "Crisp gram-flour fritters with mint chutney."],
   ["pani_puri", "Pani puri", "starters", "indian", "golgappa|puchka|gol gappa", "Crisp puris with spiced potato and chickpeas, to fill with tangy mint-tamarind water."],
-  ["papdi_chaat", "Papdi chaat", "starters", "indian", "chaat|dahi papdi chaat|aloo chaat", "Crisp wafers with potato, chickpeas, sweet yoghurt and tamarind and mint chutneys."],
+  ["papdi_chaat", "Papdi chaat", "starters", "indian", "dahi papdi chaat|aloo chaat", "Crisp wafers with potato, chickpeas, sweet yoghurt and tamarind and mint chutneys."],
   ["masala_dosa", "Masala dosa", "breakfast", "south indian", "dosa|plain dosa|mysore masala dosa", "Crisp fermented rice-and-lentil cr\xEApe with spiced potato, sambar and coconut chutney."],
   ["idli", "Idli", "breakfast", "south indian", "idli sambar", "Steamed rice-and-lentil cakes with sambar and coconut chutney."],
   ["vada", "Medu vada", "breakfast", "south indian", "vada sambar|medu vada", "Crisp lentil doughnuts with sambar and coconut chutney."],
@@ -283,14 +290,14 @@ var ROWS = [
   ["masala_chai", "Masala chai", "tea", "indian", "chai|cutting chai|kadak chai|adrak chai", "Strong tea simmered with milk, fresh ginger and cardamom."],
   // ---- Middle Eastern / Levant
   ["hummus", "Hummus", "starters", "levantine", "houmous|hommos|hummus beiruti", "Smooth chickpea and tahini pur\xE9e with lemon and good olive oil, served with warm bread."],
-  ["moutabal", "Moutabal", "starters", "levantine", "mutabbal|baba ganoush|baba ghanoush", "Smoky charred aubergine with tahini, garlic and pomegranate."],
+  ["moutabal", "Moutabal", "starters", "levantine", "mutabbal|mutabal|moutabbal|baba ganoush|baba ghanoush|baba ghanouj", "Smoky charred aubergine with tahini, garlic and pomegranate."],
   ["falafel", "Falafel", "starters", "levantine", "falafel wrap|falafel plate", "Crisp chickpea and herb fritters with tahini sauce and pickles."],
   ["fattoush", "Fattoush", "salads", "levantine", "fatoush", "Crunchy garden salad with toasted pita, sumac and pomegranate molasses dressing."],
   ["tabbouleh", "Tabbouleh", "salads", "levantine", "tabouleh|tabouli", "Finely chopped parsley with tomato, mint, bulgur and lemon."],
   ["shawarma", "Shawarma", "burgers_sandwiches", "levantine", "chicken shawarma|beef shawarma|shawarma wrap|shawarma plate", "Spit-roasted, spiced meat shaved thin, wrapped with garlic toum, pickles and fries."],
   ["shish_tawook", "Shish tawook", "grill", "levantine", "shish taouk|tawook|chicken tawook", "Chicken marinated in garlic, lemon and yoghurt, chargrilled on skewers with toum."],
   ["mixed_grill", "Mixed grill", "grill", "levantine", "mix grill|arabic mixed grill", "A selection of charcoal-grilled kebabs, tawook and lamb chops with grilled vegetables and bread."],
-  ["kofta", "Kofta", "grill", "levantine", "kafta|lamb kofta|kofte|kebab halabi", "Spiced minced lamb with parsley and onion, grilled over charcoal."],
+  ["kofta", "Kofta", "grill", "levantine", "kafta|grilled kafta|lamb kofta|kofte|kebab halabi|kebab halaby", "Spiced minced lamb with parsley and onion, grilled over charcoal."],
   ["manakeesh", "Manakeesh", "bakery", "levantine", "manakish|manaeesh|zaatar manakeesh|cheese manakeesh", "Fresh flatbread baked with za'atar and olive oil or melting cheese."],
   ["kunafa", "Kunafa", "desserts", "levantine", "knafeh|kunafeh|kanafeh", "Crisp golden pastry over warm, stretchy cheese, soaked in orange-blossom syrup with pistachio."],
   ["umm_ali", "Umm ali", "desserts", "middle eastern", "om ali", "Warm baked pastry pudding with milk, nuts and raisins."],
@@ -299,16 +306,18 @@ var ROWS = [
   ["shakshuka", "Shakshuka", "breakfast", "levantine", "shakshouka", "Eggs baked in a spiced tomato and pepper sauce, with bread for dipping."],
   // ---- Western / bistro / café
   ["eggs_benedict", "Eggs Benedict", "breakfast", "western", "eggs benny|eggs royale|eggs florentine", "Poached eggs on a toasted muffin with ham and buttery hollandaise."],
-  ["full_breakfast", "Full breakfast", "breakfast", "british", "full english|big breakfast|full english breakfast|fry up", "Eggs your way, sausage, bacon, beans, mushrooms, tomato and toast."],
+  ["full_breakfast", "Full breakfast", "breakfast", "british", "full english|big breakfast|full english breakfast|english breakfast|fry up", "Eggs your way, sausage, bacon, beans, mushrooms, tomato and toast."],
   ["avocado_toast", "Avocado toast", "breakfast", "western", "smashed avocado|avo toast|smashed avo", "Smashed avocado on toasted sourdough with lemon, chilli and a poached egg."],
   ["pancakes", "Pancakes", "breakfast", "western", "buttermilk pancakes|stack of pancakes|hotcakes", "Fluffy buttermilk pancakes with maple syrup and butter."],
   ["french_toast", "French toast", "breakfast", "western", "brioche french toast", "Thick brioche soaked in vanilla custard and pan-fried until golden."],
-  ["granola", "Granola bowl", "breakfast", "western", "granola|yoghurt bowl|acai bowl|parfait", "House granola with thick yoghurt, seasonal fruit and honey."],
+  ["granola", "Granola bowl", "breakfast", "western", "granola|granola yoghurt|yoghurt bowl|yogurt bowl|parfait", "House granola with thick yoghurt, seasonal fruit and honey."],
+  ["acai_bowl", "A\xE7a\xED bowl", "breakfast", "western", "acai bowl|acai", "Frozen a\xE7a\xED blended thick, topped with granola, fruit and honey."],
   ["omelette", "Omelette", "breakfast", "western", "omelet|cheese omelette|masala omelette", "A three-egg omelette, folded soft, with toast."],
-  ["croissant", "Croissant", "bakery", "french", "butter croissant|almond croissant|pain au chocolat", "All-butter laminated pastry, baked until crisp and flaky."],
+  ["croissant", "Croissant", "bakery", "french", "butter croissant|plain croissant", "All-butter laminated pastry, baked until crisp and flaky."],
+  ["chocolate_croissant", "Chocolate croissant", "bakery", "french", "pain au chocolat|chocolate croissant", "Flaky butter pastry wrapped around dark chocolate."],
   ["banana_bread", "Banana bread", "bakery", "western", "banana loaf", "Moist banana loaf, served warm with butter."],
   ["brownie", "Brownie", "desserts", "western", "chocolate brownie|fudge brownie", "Dense dark-chocolate brownie with a crackled top."],
-  ["cheesecake", "Cheesecake", "desserts", "western", "baked cheesecake|basque cheesecake|new york cheesecake", "Baked vanilla cheesecake on a buttery biscuit base."],
+  ["cheesecake", "Cheesecake", "desserts", "western", "baked cheesecake|basque cheesecake|new york cheesecake|san sebastian cheesecake", "Baked vanilla cheesecake on a buttery biscuit base."],
   ["tiramisu", "Tiramisu", "desserts", "italian", "tiramis\xF9", "Espresso-soaked savoiardi layered with mascarpone cream and cocoa."],
   ["sticky_toffee_pudding", "Sticky toffee pudding", "desserts", "british", "sticky toffee|stp", "Warm date sponge with toffee sauce and vanilla ice cream."],
   ["chocolate_fondant", "Chocolate fondant", "desserts", "french", "lava cake|molten chocolate cake|chocolate lava cake", "Warm dark-chocolate pudding with a molten centre."],
@@ -351,22 +360,29 @@ var ROWS = [
   ["ramen", "Ramen", "soups", "japanese", "tonkotsu ramen|shoyu ramen|miso ramen", "Springy noodles in a long-simmered broth with soft egg and toppings."],
   ["sushi", "Sushi", "starters", "japanese", "maki|california roll|nigiri|sushi roll", "Seasoned rice and fresh fish, rolled or pressed to order."],
   // ---- Coffee & drinks
-  ["espresso", "Espresso", "coffee", "global", "single espresso|double espresso|doppio", "A short, intense shot."],
+  ["espresso", "Espresso", "coffee", "global", "single espresso|espresso single", "A short, intense shot."],
+  ["double_espresso", "Double espresso", "coffee", "global", "doppio|espresso double", "Two shots, short and strong."],
+  ["macchiato", "Macchiato", "coffee", "global", "espresso macchiato", "Espresso marked with a spoon of milk foam."],
   ["americano", "Americano", "coffee", "global", "long black", "Espresso lengthened with hot water."],
   ["cappuccino", "Cappuccino", "coffee", "global", "cappucino", "Espresso with steamed milk and a deep layer of foam."],
-  ["latte", "Latte", "coffee", "global", "cafe latte|caffe latte|vanilla latte|spanish latte", "Espresso with silky steamed milk."],
+  ["latte", "Latte", "coffee", "global", "cafe latte|caffe latte|coffee latte", "Espresso with silky steamed milk."],
+  ["spanish_latte", "Spanish latte", "coffee", "global", "spanish latte|hot spanish latte", "Espresso with steamed milk, sweetened with condensed milk."],
+  ["iced_spanish_latte", "Iced Spanish latte", "coffee", "global", "iced spanish latte", "Espresso and condensed milk over ice, topped with cold milk."],
+  ["piccolo", "Piccolo", "coffee", "global", "piccolo latte", "A ristretto shot in a small glass of warm milk."],
   ["flat_white", "Flat white", "coffee", "global", "flatwhite", "A double shot with a thin layer of velvety milk."],
-  ["cortado", "Cortado", "coffee", "global", "piccolo|gibraltar", "Espresso cut with an equal measure of warm milk."],
+  ["cortado", "Cortado", "coffee", "global", "gibraltar", "Espresso cut with an equal measure of warm milk."],
   ["mocha", "Mocha", "coffee", "global", "cafe mocha|caffe mocha", "Espresso, dark chocolate and steamed milk."],
   ["cold_brew", "Cold brew", "coffee", "global", "cold brew coffee", "Coffee steeped cold for 18 hours: smooth and naturally sweet."],
-  ["iced_latte", "Iced latte", "coffee", "global", "iced coffee|iced spanish latte", "Espresso over ice with cold milk."],
-  ["matcha_latte", "Matcha latte", "tea", "japanese", "matcha|iced matcha", "Stone-ground matcha whisked with milk."],
+  ["iced_latte", "Iced latte", "coffee", "global", "iced coffee|iced cafe latte", "Espresso over ice with cold milk."],
+  ["matcha_latte", "Matcha latte", "tea", "japanese", "matcha|hot matcha latte|matcha hot", "Stone-ground matcha whisked with milk."],
+  ["iced_americano", "Iced Americano", "coffee", "global", "iced long black", "Espresso and cold water over ice."],
+  ["tea", "Tea", "tea", "global", "hot tea|black tea|english breakfast tea|earl grey|earl grey tea|green tea", "Loose-leaf tea, brewed to order."],
   ["hot_chocolate", "Hot chocolate", "drinks", "global", "hot cocoa", "Real chocolate melted into steamed milk."],
-  ["fresh_juice", "Fresh juice", "drinks", "global", "orange juice|fresh orange|juice|fresh lime|watermelon juice|lemon mint", "Pressed to order."],
+  ["fresh_juice", "Fresh juice", "drinks", "global", "orange juice|fresh orange juice|fresh juice|watermelon juice|lemon mint|lemon mint juice|minted lemonade|lemon and mint", "Pressed to order."],
   ["milkshake", "Milkshake", "drinks", "global", "shake|thick shake|oreo shake", "Thick, cold and made with proper ice cream."],
   ["smoothie", "Smoothie", "drinks", "global", "fruit smoothie|berry smoothie", "Blended fruit, nothing added."],
   ["iced_tea", "Iced tea", "drinks", "global", "lemon iced tea|peach iced tea", "Fresh-brewed tea over ice."],
-  ["soft_drink", "Soft drink", "drinks", "global", "coke|pepsi|sprite|7up|soda|soft drinks|diet coke|coca cola|fanta", "Chilled can or bottle."],
+  ["soft_drink", "Soft drink", "drinks", "global", "coke|pepsi|sprite|7up|soft drinks|softdrinks|diet coke|coca cola|coke zero|fanta|soft beverages", "Chilled can or bottle."],
   ["water", "Water", "drinks", "global", "mineral water|still water|sparkling water", "Still or sparkling."],
   ["mojito", "Mojito", "drinks", "global", "virgin mojito|mint mojito", "Fresh mint, lime and soda over crushed ice."]
 ];
@@ -414,16 +430,152 @@ function dice(a, b) {
   for (const n of B.values()) total += n;
   return 2 * inter / total;
 }
-function similarity(a, b) {
-  const na = tokens(a).join(" "), nb = tokens(b).join(" ");
-  if (!na || !nb) return 0;
+var FORM_WORDS = /* @__PURE__ */ new Set([
+  "roll",
+  "rolls",
+  "wrap",
+  "sandwich",
+  "burger",
+  "pizza",
+  "flatbread",
+  "salad",
+  "soup",
+  "biryani",
+  "pulao",
+  "pav",
+  "kulcha",
+  "paratha",
+  "naan",
+  "croissant",
+  "muffin",
+  "cake",
+  "cookie",
+  "cookies",
+  "shake",
+  "milkshake",
+  "smoothie",
+  "frappe",
+  "latte",
+  "tea",
+  "juice",
+  "soda",
+  "lemonade",
+  "bowl",
+  "pasta",
+  "fries",
+  "chaat",
+  "sauce",
+  "combo",
+  "platter",
+  "thali",
+  "meal",
+  "box",
+  "toastie",
+  "panini",
+  "bagel",
+  "taco",
+  "tacos",
+  "noodles",
+  "rice",
+  "curry",
+  "masala",
+  "tikka",
+  "kebab",
+  "shawarma",
+  "pudding",
+  "bhature",
+  "fatteh",
+  "fattah",
+  "manakeesh",
+  "pie",
+  "fatayer",
+  "omelette",
+  "waffle",
+  "pancakes",
+  "macchiato",
+  "cortado",
+  "mocha",
+  "affogato",
+  "tonic",
+  "mojito",
+  "plate",
+  "sizzler",
+  "kadhi",
+  "bhurji",
+  "chilli"
+]);
+var VARIANT_WORDS = /* @__PURE__ */ new Set([
+  "iced",
+  "ice",
+  "cold",
+  "frozen",
+  "spanish",
+  "chai",
+  "matcha",
+  "vanilla",
+  "caramel",
+  "hazelnut",
+  "rose",
+  "saffron",
+  "pistachio",
+  "lotus",
+  "karak",
+  "double",
+  "triple",
+  "mango",
+  "strawberry",
+  "chocolate",
+  "nutella",
+  "almond",
+  "zaatar",
+  "truffle",
+  "dirty",
+  "white",
+  "ube",
+  "date",
+  "honey",
+  "turkish",
+  "arabic",
+  "salted",
+  "peanut",
+  "oreo",
+  "meat",
+  "jumbo",
+  "family",
+  "mini",
+  "large",
+  "small",
+  "big",
+  "half",
+  "full",
+  "kids",
+  "protein",
+  "keto",
+  "vegan"
+]);
+function tokenEq(a, b) {
+  if (a === b) return true;
+  if (a.length >= 5 && b.length >= 5) return dice(a, b) >= 0.8;
+  return false;
+}
+function matchScore(item, ref) {
+  const a = tokens(item), b = tokens(ref);
+  if (!a.length || !b.length) return 0;
+  const na = a.join(" "), nb = b.join(" ");
   if (na === nb) return 1;
-  const ta = new Set(na.split(" ")), tb = new Set(nb.split(" "));
-  let common = 0;
-  for (const w of ta) if (tb.has(w)) common++;
-  const overlap = common / Math.max(ta.size, tb.size);
-  const contained = na.includes(nb) || nb.includes(na) ? 0.9 * Math.min(na.length, nb.length) / Math.max(na.length, nb.length) + 0.1 : 0;
-  return Math.max(dice(na, nb), overlap, contained);
+  const unmatched = a.filter((w) => !b.some((r) => tokenEq(w, r)));
+  const covered = b.every((r) => a.some((w) => tokenEq(w, r)));
+  if (covered) {
+    if (unmatched.some((w) => FORM_WORDS.has(w) || VARIANT_WORDS.has(w))) return 0;
+    if (unmatched.length > Math.max(2, b.length)) return 0.6;
+    return 0.8 + 0.2 * (b.length / a.length);
+  }
+  if (a.length !== b.length) return 0;
+  const d = dice(na, nb);
+  return d >= 0.86 ? d : 0;
+}
+function similarity(a, b) {
+  return Math.max(matchScore(a, b), matchScore(b, a));
 }
 var INDEX = null;
 function index() {
@@ -436,11 +588,11 @@ function index() {
   }
   return INDEX;
 }
-function matchDish(name, threshold = 0.62) {
+function matchDish(name, threshold = 0.8) {
   let best = null;
   for (const c of index()) {
-    const s = similarity(name, c.label);
-    if (!best || s > best.score) best = { dish: c.dish, score: s };
+    const s = matchScore(name, c.label);
+    if (s > 0 && (!best || s > best.score || s === best.score && c.label.length > best.dish.name.length)) best = { dish: c.dish, score: s };
   }
   return best && best.score >= threshold ? best : null;
 }
@@ -928,13 +1080,15 @@ function scoreUpsell(items, inputs) {
 }
 function compareToBenchmark(items, rows, inputs, minObs = MIN_BENCHMARK_OBS) {
   const city = inputs.city.trim().toLowerCase();
-  const byKey = /* @__PURE__ */ new Map();
-  for (const r of rows) {
-    if (r.city.trim().toLowerCase() !== city) continue;
-    const a = byKey.get(r.dish_key) ?? [];
-    a.push(r.price);
-    byKey.set(r.dish_key, a);
-  }
+  const perMenu = /* @__PURE__ */ new Map();
+  rows.forEach((r, i) => {
+    if (r.city.trim().toLowerCase() !== city) return;
+    const src = r.source_url ?? `row${i}`;
+    const m = perMenu.get(r.dish_key) ?? /* @__PURE__ */ new Map();
+    m.set(src, Math.min(m.get(src) ?? Infinity, Number(r.price)));
+    perMenu.set(r.dish_key, m);
+  });
+  const byKey = new Map([...perMenu].map(([k, m]) => [k, [...m.values()]]));
   const out = [];
   for (const it of items) {
     if (it.price == null) continue;
@@ -956,7 +1110,7 @@ function priceDrift(points, inputs, now = currentMonth()) {
   if (!inputs.lastPriceChange) return null;
   const series = points.filter((p) => p.country === inputs.country).sort((a, b) => a.month.localeCompare(b.month));
   if (series.length < 2) return null;
-  const from = [...series].reverse().find((p) => p.month <= inputs.lastPriceChange) ?? null;
+  const from = [...series].reverse().find((p) => p.month <= inputs.lastPriceChange) ?? series[0];
   const to = [...series].reverse().find((p) => p.month <= now) ?? null;
   if (!from || !to || from.month === to.month) return null;
   return { drift: to.value / from.value - 1, from: from.month, to: to.month, months: monthsBetween(from.month, to.month) };

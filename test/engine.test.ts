@@ -80,6 +80,27 @@ t("dish matching + compare keys keep proteins apart", () => {
   assert.equal(compareKey("Mutton Biryani"), compareKey("Lamb Dum Biryani"));
 });
 
+t("matcher rejects different products and variants", () => {
+  const k = (s: string) => matchDish(s)?.dish.key ?? null;
+  assert.equal(k("Tea"), "tea");
+  assert.equal(k("English Breakfast Tea"), "tea");
+  assert.equal(k("English Breakfast"), "full_breakfast");
+  assert.equal(k("Chicken Soup"), "soup_of_the_day");
+  assert.notEqual(k("Chocolate Croissant"), "chocolate_fondant");
+  assert.notEqual(k("Chocolate Fondant"), "hot_chocolate");
+  assert.equal(k("Rice Pudding"), null);
+  assert.equal(k("Mushroom Tikka"), null);
+  assert.equal(k("Chicken Tikka Roll"), null);
+  assert.equal(k("Iced Spanish Latte"), "iced_spanish_latte");
+  assert.equal(k("Spanish Latte"), "spanish_latte");
+  assert.equal(k("Caffe Latte"), "latte");
+  assert.equal(k("Chai Latte"), null);
+  assert.equal(k("Double Espresso"), "double_espresso");
+  assert.equal(k("Iced Americano"), "iced_americano");
+  assert.equal(k("Pain au Chocolat"), "chocolate_croissant");
+  assert.equal(k("Chicken Biriyani"), "biryani");
+});
+
 t("stats helpers", () => {
   assert.equal(median([3, 1, 2]), 2); assert.equal(median([1, 2, 3, 4]), 2.5);
   assert.equal(monthsBetween("2025-01", "2026-11"), 22);

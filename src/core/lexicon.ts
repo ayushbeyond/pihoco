@@ -85,12 +85,12 @@ export const ABBREVIATIONS: [RegExp, string][] = [
   [/\bveg\b/g, "vegetable"], [/\bmasala\b/g, "masala"], [/\bspl\b/g, "special"],
   [/\bsrvd\b/g, "served"], [/\bpcs?\b/g, "pieces"], [/\bbbq\b/g, "barbecue"],
   [/\bmakhni\b|\bmakhanwala\b/g, "makhani"], [/\btikkah\b/g, "tikka"], [/\bbiriyani\b|\bbiryanee\b/g, "biryani"],
-  [/\bcappucino\b|\bcapuccino\b/g, "cappuccino"], [/\bexpresso\b/g, "espresso"], [/\bcroissant\b/g, "croissant"],
+  [/\bcappucino\b|\bcapuccino\b/g, "cappuccino"], [/\bkabab\b|\bkabob\b/g, "kebab"], [/\btawouk\b|\btaouk\b/g, "tawook"], [/\bdaal\b/g, "dal"], [/\bcaffe\b|\bcaffè\b/g, "cafe"], [/\bexpresso\b/g, "espresso"], [/\bcroissant\b/g, "croissant"],
 ];
 
 export const STOPWORDS = new Set([
   "the", "a", "an", "of", "with", "and", "in", "on", "our", "house", "style", "special", "classic", "fresh",
-  "signature", "homemade", "served", "w", "de", "la", "le", "al", "di", "e", "ka", "ki", "wala", "wali",
+  "signature", "homemade", "served", "cafe", "plain", "regular", "w", "de", "la", "le", "al", "di", "e", "ka", "ki", "wala", "wali",
 ]);
 
 export const PROTEINS: [string, RegExp][] = [
