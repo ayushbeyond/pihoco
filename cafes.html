@@ -41,6 +41,7 @@
   <nav class="nav__links" aria-label="Primary">
     <a href="index.html#audit">The Audit</a>
     <a href="index.html#pricing">Pricing</a>
+    <a href="/app/">Free X-ray</a>
     <a href="index.html#method">Method</a>
     <a href="cafes.html">For cafés</a>
     <a href="index.html#founder">Founder</a>
@@ -57,6 +58,7 @@
     <a href="index.html#method">Method</a>
     <a href="cafes.html">For cafés</a>
     <a href="index.html#founder">Founder</a>
+    <a href="/app/">Free menu X-ray</a>
     <a href="#scorecard">Free menu scorecard</a>
   </nav>
   <p class="mmenu__country"><label class="country"><span class="sr-only">Your country</span><select data-country aria-label="Choose your country for prices"><option value="AED">UAE · AED</option><option value="GBP">UK · GBP</option><option value="SGD">Singapore · SGD</option><option value="USD">Elsewhere · USD</option></select></label></p>
@@ -102,6 +104,44 @@
         <ul><li>A separate delivery price list</li><li>Packaging cost per item</li><li>Which items travel badly and should come off the app</li></ul>
       </li>
     </ol>
+  </section>
+
+  <!-- FREE TOOL: MENU X-RAY APP -->
+  <section class="tool" id="free-xray" aria-labelledby="tool-title">
+    <div class="tool__copy">
+      <p class="label" data-reveal>Free tool · For a limited time</p>
+      <h2 class="h2" id="tool-title" data-reveal>X-ray your own menu <em>in 60 seconds.</em></h2>
+      <p class="lede" data-reveal>Paste it, upload a PDF or snap a photo. You get a score out of 100, three fixes ranked by the money behind them, and how your coffee and bakery prices sit against Dubai cafés: the index already covers cappuccino, flat white, Spanish latte, croissant, açaí bowl and more.</p>
+      <ol class="tool__steps" data-reveal>
+        <li><span>01</span>Add your menu and city. Covers and average bill are optional and never leave your browser.</li>
+        <li><span>02</span>Check the dishes and prices we read. Fix anything in a tap.</li>
+        <li><span>03</span>Get your score, three fixes, suggested descriptions and a money estimate you can adjust.</li>
+      </ol>
+      <div class="tool__cta" data-reveal>
+        <a class="btn" href="/app/start">Start the free X-ray</a>
+        <a class="tool__link" href="/app/price-index">See the Dubai price index →</a>
+      </div>
+      <dl class="tool__data" data-tool-stats data-reveal>
+        <div><dt>Menu prices</dt><dd data-stat="prices">560</dd></div>
+        <div><dt>Public menus</dt><dd data-stat="menus">14</dd></div>
+        <div><dt>Dishes with 5+ local prices</dt><dd data-stat="comparable_dishes">22</dd></div>
+      </dl>
+      <p class="note">Collected from venues' own websites in Dubai. Restaurant inflation from the UK ONS and US BLS. No AI reads your menu: every finding comes from published rules, with the evidence shown.</p>
+    </div>
+    <figure class="tool__card" aria-label="Example result" data-reveal>
+      <div class="tool__cover">
+        <p class="tool__over">Menu X-ray · Example</p>
+        <p class="tool__score">56<small>/100</small></p>
+        <p class="tool__verdict">Busy, but not earning in the right places.</p>
+        <p class="tool__money">Money on the table · scenario<b>+AED 2,300–4,950 a month</b></p>
+      </div>
+      <ol class="tool__fixes">
+        <li><span>01</span><b>Build the dessert close</b><i>+AED 1,250–3,200 / month</i></li>
+        <li><span>02</span><b>Add an add-on line</b><i>+AED 1,050–2,650 / month</i></li>
+        <li><span>03</span><b>Add a premium anchor to mains</b><i>Raises the value of every mid-priced dish</i></li>
+      </ol>
+      <figcaption class="note">Illustrative result from a sample menu, not client data.</figcaption>
+    </figure>
   </section>
 
   <section class="cupcalc" aria-labelledby="calc-title">
@@ -208,5 +248,13 @@
 <script src="assets/js/lenis.min.js" defer></script>
 <script src="assets/js/config.js" defer></script>
 <script src="assets/js/site.js" defer></script>
+<script>
+/* Live numbers for the free X-ray section, counted from the PIHOCO database. Static numbers stay if this fails. */
+(function(){var box=document.querySelector('[data-tool-stats]');if(!box||!window.fetch)return;
+var k='sb_publishable_QhuV3Qj4cbQpjDWorB84FQ_kY4roZeO';
+fetch('https://appccwwupxkfzzuawzzr.supabase.co/rest/v1/rpc/public_stats',{method:'POST',headers:{apikey:k,'Content-Type':'application/json'},body:'{}'})
+.then(function(r){return r.ok?r.json():null}).then(function(s){if(!s||!s.prices)return;
+['prices','menus','comparable_dishes'].forEach(function(f){var el=box.querySelector('[data-stat="'+f+'"]');if(el&&s[f]!=null)el.textContent=Number(s[f]).toLocaleString('en-GB')});}).catch(function(){});})();
+</script>
 </body>
 </html>
