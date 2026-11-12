@@ -18,7 +18,8 @@
 :root{--bg:#f3eee6;--bg2:#ebe4d8;--paper:#faf7f2;--ink:#1c1915;--night:#171411;--muted:#6a6157;--line:rgba(28,25,21,.14);--brass:#946f3e;--brass-l:#d2b487;--gain:#1E3027;--leak:#A65E49;
   --serif:"Newsreader",Georgia,serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit}img{max-width:100%;display:block;height:auto}
 h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.02em;margin:0}
@@ -47,8 +48,8 @@ section{padding:112px 0}
 /* hero */
 .hero{padding:0;position:relative;overflow:hidden;background:var(--night);color:var(--bg);min-height:min(88vh,820px);display:flex;align-items:flex-end}
 .hero picture,.hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 30%}
-.hero picture img{filter:brightness(.82) saturate(.78);transform:scale(1.012)}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,20,17,.94) 0%,rgba(23,20,17,.82) 45%,rgba(23,20,17,.42) 100%),linear-gradient(0deg,rgba(23,20,17,.78),rgba(23,20,17,.10) 58%,rgba(23,20,17,.18) 100%)}
+.hero picture img{filter:brightness(.9) saturate(.88)}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 38% 42% at 100% 100%,rgba(23,20,17,.92),rgba(23,20,17,0) 100%),linear-gradient(90deg,rgba(23,20,17,.93) 0%,rgba(23,20,17,.78) 40%,rgba(23,20,17,.18) 72%,rgba(23,20,17,.05) 100%),linear-gradient(0deg,rgba(23,20,17,.72),rgba(23,20,17,0) 40%)}
 .hero .wrap{position:relative;z-index:1;padding-top:120px;padding-bottom:72px;width:100%}
 .hero .label{color:var(--brass-l)}
 .hero h1{font-size:clamp(46px,6.4vw,92px);line-height:.98;margin:22px 0 0;max-width:12ch}
@@ -152,6 +153,37 @@ footer nav{display:flex;gap:22px;flex-wrap:wrap}
 footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
 
 .mcta{display:none}
+
+/* X-ray illustration */
+.xr{margin:0}
+.xr svg{width:100%;height:auto;display:block;overflow:visible}
+.xr .t-k{font:600 9px/1 var(--sans);letter-spacing:.24em;fill:#6a6157}
+.xr .t-d{font:400 13px/1 var(--serif);fill:#1c1915}
+.xr .t-p{font:500 11px/1 var(--sans);fill:#6a6157;font-variant-numeric:tabular-nums}
+.xr .t-ax{font:600 8.5px/1 var(--sans);letter-spacing:.2em;fill:#6a6157}
+.xr .t-q{font:600 9.5px/1 var(--sans);letter-spacing:.2em}
+.xr .t-a{font:italic 400 12px/1 var(--serif);fill:#6a6157}
+.xr .scan{transform:translateY(22px);opacity:0}
+.xr.run .scan{opacity:1;animation:xrScan 2.6s cubic-bezier(.45,0,.35,1) forwards}
+@keyframes xrScan{from{transform:translateY(22px)}to{transform:translateY(418px)}}
+.xr .tick{opacity:0;transition:opacity .3s}
+.xr .tick.on{opacity:1}
+.xr .dot{opacity:0;transition:transform .95s cubic-bezier(.65,0,.25,1),opacity .25s}
+.xr .dot.on{opacity:1}
+.xr .ql text,.xr .qb{opacity:.0;transition:opacity .6s}
+.xr.done .ql text{opacity:1}.xr.done .qb{opacity:1}
+.xr figcaption{font-size:12px;color:var(--muted);margin-top:12px;display:flex;justify-content:space-between;gap:12px}
+.replay{all:unset;cursor:pointer;font:600 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:3px}
+.replay:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+/* reveal on scroll: once, subtle, below the hero only */
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .flow>div{border-top-color:transparent;position:relative}
+.js .flow>div::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.65,0,.25,1)}
+.js .flow.in>div::before{transform:scaleX(1)}
+.js .flow.in>div:nth-child(2)::before{transition-delay:.25s}.js .flow.in>div:nth-child(3)::before{transition-delay:.5s}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none}.js .flow>div::before{transform:none}.xr .scan{display:none}.xr .dot,.xr .tick,.xr .ql text,.xr .qb{opacity:1!important;transition:none}}
 @media (max-width:960px){
   section{padding:80px 0}
   .matrix .wrap,.audit .top,.changes,.founder .wrap,.close .wrap{grid-template-columns:1fr;gap:44px}
@@ -163,9 +195,12 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
 }
 @media (max-width:600px){
   .wrap{padding:0 16px}
-  .hero{min-height:auto}
-  .hero::after{background:linear-gradient(0deg,rgba(23,20,17,.97) 25%,rgba(23,20,17,.82) 72%,rgba(23,20,17,.58) 100%)}
-  .hero .wrap{padding-top:200px;padding-bottom:48px}
+  .hero{min-height:0;display:block}
+  .hero picture{position:relative;display:block;height:auto}
+  .hero picture img{position:relative;height:auto;aspect-ratio:1/1;object-position:62% 32%;filter:none}
+  .hero::after{inset:0 0 auto 0;height:100vw;background:linear-gradient(0deg,#171411 0%,rgba(23,20,17,0) 42%)}
+  .hero .wrap{padding-top:0;margin-top:-64px;padding-bottom:48px}
+  .hero h1{font-size:44px}
   .hero .btn{width:100%}
   .trust{gap:10px 20px}
   .quad div{padding-right:12px}.quad div:nth-child(even){padding-left:12px}.quad b{font-size:19px}
@@ -179,6 +214,7 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("js")</script>
 
 <header class="nav">
   <div class="wrap">
@@ -200,7 +236,7 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
     <div class="wrap">
       <span class="label">Chef-led menu profitability · Dubai, UAE</span>
       <h1>What sells isn't always what <em>earns.</em></h1>
-      <p>We help independent restaurants understand what each dish contributes, where margin is being lost and what to change next. Start with a free menu check. For a proper dish-by-dish profitability review, we work with your actual sales and recipe costs.</p>
+      <p>We show you which dishes earn, which only sell, and what to change next. Start with a free menu check.</p>
       <div class="ctas">
         <a class="btn light" href="../app/start">Get a free menu check <span aria-hidden="true">→</span></a>
         <a class="btn ghost" href="#audit">See the audit</a>
@@ -215,18 +251,40 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
       <div>
         <span class="label">The problem</span>
         <h2 class="h2">A bestseller can still be a <em>margin problem.</em></h2>
-        <p class="lede">Popularity and contribution are different measures. A dish can drive volume while leaving too little behind after its direct costs. With item-level sales and recipe data, we put both measures side by side and give each dish a clear commercial role.</p>
-        <div class="quad">
+        <p class="lede">Popularity and earnings are different numbers. A dish can sell all night and still leave too little after food cost. We plot both, so every dish gets a clear job.</p>
+        <div class="quad rv">
           <div><b>Stars</b><small>Popular and profitable.</small><i class="c-star">Protect</i></div>
           <div><b>Plowhorses</b><small>Popular, thin margin.</small><i class="c-plow">Re-cost</i></div>
           <div><b>Puzzles</b><small>Profitable, overlooked.</small><i class="c-puz">Promote</i></div>
           <div><b>Dogs</b><small>Neither.</small><i class="c-dog">Rework or retire</i></div>
         </div>
       </div>
-      <div class="plates">
-        <img src="../assets/img/plates-matrix.webp" width="1376" height="768" alt="Four plated dishes on linen arranged in a grid, representing the four kinds of dish." loading="lazy">
-        <span style="left:8%;top:8%">Puzzle</span><span style="right:8%;top:8%">Star</span><span style="left:8%;bottom:8%">Dog</span><span style="right:8%;bottom:8%">Plowhorse</span>
-      </div>
+      <figure class="xr" id="xr" aria-label="Illustration: a menu is scanned and each dish moves into one of four groups: Stars, Plowhorses, Puzzles and Dogs.">
+        <svg viewBox="0 0 600 440" role="img" aria-hidden="true">
+          <defs><linearGradient id="scanG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2b487" stop-opacity="0"/><stop offset="1" stop-color="#d2b487" stop-opacity=".55"/></linearGradient><clipPath id="cardClip"><rect x="12" y="22" width="216" height="396"/></clipPath></defs>
+          <rect x="12" y="22" width="216" height="396" fill="#faf7f2" stroke="#1c1915" stroke-opacity=".18"/>
+          <text x="120" y="56" text-anchor="middle" class="t-k">DINNER MENU</text>
+          <line x1="40" y1="70" x2="200" y2="70" stroke="#1c1915" stroke-opacity=".14"/>
+          <g class="lines"></g>
+          <g clip-path="url(#cardClip)"><g class="scan"><rect x="12" y="-46" width="216" height="46" fill="url(#scanG)"/><line x1="12" y1="0" x2="228" y2="0" stroke="#946f3e" stroke-width="1.5"/></g></g>
+          <g class="grid">
+            <rect x="282" y="30" width="306" height="364" fill="none" stroke="#1c1915" stroke-opacity=".22"/>
+            <rect class="qb" x="282" y="30" width="153" height="182" fill="#3f5e75" fill-opacity=".06"/><rect class="qb" x="435" y="30" width="153" height="182" fill="#1E3027" fill-opacity=".07"/>
+            <rect class="qb" x="282" y="212" width="153" height="182" fill="#A65E49" fill-opacity=".06"/><rect class="qb" x="435" y="212" width="153" height="182" fill="#946f3e" fill-opacity=".07"/>
+            <line x1="435" y1="30" x2="435" y2="394" stroke="#1c1915" stroke-dasharray="3 4" stroke-opacity=".5"/><line x1="282" y1="212" x2="588" y2="212" stroke="#1c1915" stroke-dasharray="3 4" stroke-opacity=".5"/>
+            <text x="435" y="420" text-anchor="middle" class="t-ax">SELLS →</text>
+            <text transform="translate(268 212) rotate(-90)" text-anchor="middle" class="t-ax">EARNS PER DISH →</text>
+          </g>
+          <g class="ql">
+            <text x="294" y="52" class="t-q" fill="#3f5e75">PUZZLES</text><text x="294" y="68" class="t-a">Promote</text>
+            <text x="576" y="52" text-anchor="end" class="t-q" fill="#1E3027">STARS</text><text x="576" y="68" text-anchor="end" class="t-a">Protect</text>
+            <text x="294" y="368" class="t-q" fill="#A65E49">DOGS</text><text x="294" y="384" class="t-a">Rework or retire</text>
+            <text x="576" y="368" text-anchor="end" class="t-q" fill="#8a6a33">PLOWHORSES</text><text x="576" y="384" text-anchor="end" class="t-a">Re-cost</text>
+          </g>
+          <g class="dots"></g>
+        </svg>
+        <figcaption>Illustration of how we sort a menu. Not client data. <button type="button" class="replay" id="xrReplay">Replay</button></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -235,20 +293,20 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
     <div class="wrap">
       <div class="top">
         <div><span class="label">The Menu Profit Boost Audit</span><h2 class="h2">One audit. A clear decision for <em>every dish.</em></h2></div>
-        <p class="lede" style="margin:0">A fixed-scope review of one outlet and its agreed menu, using your actual sales mix, recipe specifications and current ingredient costs. Typically delivered in about 10 working days once complete data is received.</p>
+        <p class="lede" style="margin:0">A fixed-scope review of one outlet's menu, using your real sales, recipes and ingredient costs. About 10 working days once we have the data.</p>
       </div>
-      <div class="flow">
-        <div><span class="n">01</span><h3>You share</h3><ul><li>Current menu and sales channels</li><li>8–13 weeks of item-level POS sales</li><li>Recipe cards: quantities, portions and yields</li><li>Current supplier prices or invoices</li><li>Delivery commissions and packaging costs, if relevant</li></ul></div>
-        <div><span class="n">02</span><h3>We analyse</h3><ul><li>Popularity, sales mix and contribution</li><li>Recipe cost, pricing and channel economics</li><li>Kitchen complexity and ingredient cross-use</li><li>Menu balance and category performance</li></ul></div>
-        <div><span class="n">03</span><h3>You receive</h3><ul><li>Keep, reprice, reposition, rework or retire decisions</li><li>Dish-level contribution workbook and menu matrix</li><li>Prioritised action plan and written report</li><li>Excel model and founder review call</li></ul></div>
+      <div class="flow rv">
+        <div><span class="n">01</span><h3>You share</h3><ul><li>Your current menu</li><li>8–13 weeks of item sales from your POS</li><li>Recipe cards with portions and yields</li><li>Supplier prices, and delivery commissions if relevant</li></ul></div>
+        <div><span class="n">02</span><h3>We analyse</h3><ul><li>What sells, and what each dish earns</li><li>Recipe cost and pricing, by channel</li><li>Kitchen complexity and shared ingredients</li><li>Balance across each menu section</li></ul></div>
+        <div><span class="n">03</span><h3>You receive</h3><ul><li>A decision for every dish</li><li>Menu matrix and contribution workbook</li><li>A prioritised action plan and report</li><li>A review call with Piyush</li></ul></div>
       </div>
-      <div class="changes">
+      <div class="changes rv">
         <a href="../assets/sample/PIHOCO-sample-audit.pdf" aria-label="Download the sample audit (PDF)"><img src="../assets/img/report-1.webp" width="900" height="1273" alt="Cover of a PIHOCO sample audit report." loading="lazy"></a>
         <div>
-          <span class="label">The decisions the audit is built to support</span>
-          <ol><li>Protect dishes that combine strong demand and contribution.</li><li>Recalibrate prices against contribution, demand and positioning.</li><li>Rework recipes, portions or garnishes where the numbers justify it.</li><li>Retire weak dishes when the commercial and operational case is clear.</li></ol>
+          <span class="label">The decisions it leads to</span>
+          <ol><li>Protect what sells and earns.</li><li>Reprice where the numbers allow.</li><li>Rework a recipe, portion or garnish.</li><li>Retire what costs more than it gives.</li></ol>
           <div class="assure"><span>Exports only · no POS login</span><span>NDA available</span><span>One outlet · scope agreed upfront</span></div>
-          <p style="margin-top:16px;color:var(--muted);font-size:13px">We calculate dish-level contribution using the direct costs agreed in the project scope. This is menu analysis, not a statutory financial audit or a calculation of net profit after rent, payroll and all overheads.</p>
+          <p style="margin-top:16px;color:var(--muted);font-size:13px">Contribution is calculated from the direct costs agreed in scope. It is menu analysis, not a financial audit or net profit after rent and payroll.</p>
           <p style="margin-top:22px"><a class="tlink" href="../assets/sample/PIHOCO-sample-audit.pdf">Download the sample audit (PDF) →</a></p>
         </div>
       </div>
@@ -262,27 +320,27 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
         <div><span class="label">Pricing</span><h2 class="h2">Start free. Pay when it's <em>worth it.</em></h2></div>
         <div class="cur" role="group" aria-label="Currency"><button data-cur="USD" aria-pressed="true">USD</button><button data-cur="AED" aria-pressed="false">AED</button><button data-cur="GBP" aria-pressed="false">GBP</button><button data-cur="SGD" aria-pressed="false">SGD</button></div>
       </div>
-      <div class="tiers">
+      <div class="tiers rv">
         <div class="tier">
           <span class="label">01 · 60 seconds</span><h3>Menu check</h3>
-          <div class="price">Free</div><p class="note">Instant preliminary check using your published menu.</p>
-          <ul><li>Menu structure and pricing observations</li><li>Menu health score and three potential opportunities</li><li>Dish-description improvements</li><li>Local price context where benchmark coverage is sufficient</li></ul>
+          <div class="price">Free</div><p class="note">An instant first look at your published menu.</p>
+          <ul><li>Menu score and three opportunities</li><li>Pricing and layout observations</li><li>Better dish descriptions</li><li>Local price context, where we have data</li></ul>
           <a class="btn ghost" href="../app/start">Check my menu</a>
         </div>
         <div class="tier hi">
           <span class="label">02 · About 10 working days</span><h3>Menu Profit Boost Audit</h3>
-          <div class="price num"><span data-p="audit0">USD 750</span><s data-p="audit1">USD 1,200</s></div><p class="note">Founding rate for the first five paid audit engagements, with outlet, menu size and deliverables agreed in writing before payment.</p>
-          <ul><li>Dish-level contribution based on supplied data</li><li>Menu engineering matrix by category</li><li>Repricing and recipe recommendations</li><li>Kitchen complexity and cross-utilisation review</li><li>Prioritised report, Excel model and founder review</li></ul>
+          <div class="price num"><span data-p="audit0">USD 750</span><s data-p="audit1">USD 1,200</s></div><p class="note">Founding rate for the first five audits. Scope agreed in writing before payment.</p>
+          <ul><li>What every dish earns, from your data</li><li>Menu matrix for each section</li><li>Pricing and recipe recommendations</li><li>Kitchen complexity review</li><li>Report, Excel model and review call</li></ul>
           <a class="btn light" href="#contact" data-pick="Menu Profit Boost Audit">Request the audit</a>
         </div>
         <div class="tier">
           <span class="label">03 · 5 weeks</span><h3>Menu Engineering Sprint</h3>
-          <div class="price num"><span data-p="sprint0">USD 2,500</span><s data-p="sprint1">USD 3,800</s></div><p class="note">A separately scoped implementation engagement, following an audit or equivalent data review.</p>
+          <div class="price num"><span data-p="sprint0">USD 2,500</span><s data-p="sprint1">USD 3,800</s></div><p class="note">After the audit, we help you make the changes. Scoped separately.</p>
           <ul><li>Repricing and dish re-engineering</li><li>New menu copy and layout brief</li><li>Staff talking points</li><li>30-day results check</li></ul>
           <a class="btn ghost" href="#contact" data-pick="Menu Engineering Sprint">Ask about a sprint</a>
         </div>
       </div>
-      <p class="pnote">Founding rates apply to the first five paid audit engagements only. Final scope, menu size, outlet count, data readiness and any additional work are confirmed in a written proposal before payment. Multi-site groups are scoped separately.</p>
+      <p class="pnote">Founding rates apply to the first five paid audits. Scope, menu size and data are confirmed in a written proposal before payment. Multi-site groups are scoped separately.</p>
     </div>
   </section>
 
@@ -305,12 +363,12 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
       <div>
         <span class="label">Questions</span>
         <h2 class="h2" style="margin-bottom:28px">Before you <em>ask.</em></h2>
-        <details><summary>Do you need access to our POS?</summary><p>No. We work from exports; we do not need a live POS login, guest records or payment-card data. Ideally, share 8–13 weeks of item-level sales by outlet and channel.</p></details>
-        <details><summary>We don't have clean cost data. Can we start?</summary><p>We can help rebuild recipe costings from recipe specifications, portion quantities, yields and current supplier prices. If item-level sales data is missing, we can still do a menu and pricing review, but we cannot produce a reliable popularity-versus-contribution matrix or call it a full menu engineering audit.</p></details>
-        <details><summary>Can you calculate actual profitability from a menu photo?</summary><p>No. A menu photo can support a preliminary review of structure, descriptions and published prices. Verified dish-level contribution requires item-level sales, recipe quantities and yields, and current ingredient costs. We distinguish estimates from calculations based on your operating data.</p></details>
-        <details><summary>Do you guarantee a specific profit increase?</summary><p>No. We identify and prioritise evidence-based opportunities; actual results depend on execution, customer response, purchasing, operations and other factors. We do not promise a fixed revenue or profit uplift.</p></details>
-        <details><summary>What happens to our data?</summary><p>Your project data is used only for the engagement and handled under the agreed confidentiality terms. The retention period and deletion process follow our <a href="../privacy.html">Privacy Policy</a> and any signed NDA. Nothing is published without your written approval.</p></details>
-        <details><summary>Do you work outside the UAE?</summary><p>Dubai and the UAE are our primary market. We take selected UK and Singapore engagements remotely; local price benchmarking is only included where we have enough relevant, current comparison data. Other markets are assessed case by case.</p></details>
+        <details><summary>Do you need access to our POS?</summary><p>No. We work from exports: 8–13 weeks of item-level sales. No POS login, guest records or card data.</p></details>
+        <details><summary>We don't have clean cost data. Can we start?</summary><p>Yes. We can rebuild recipe costings with your chef from portions, yields and supplier prices. Without item-level sales we can still review the menu and pricing, but not build a full matrix.</p></details>
+        <details><summary>Can you calculate actual profitability from a menu photo?</summary><p>No. A photo supports a first look at layout, descriptions and prices. Real dish earnings need your sales, recipes and ingredient costs, and we always say which is which.</p></details>
+        <details><summary>Do you guarantee a specific profit increase?</summary><p>No. We find and rank the opportunities your data supports. Results depend on how changes are made and how guests respond, so we never promise a fixed uplift.</p></details>
+        <details><summary>What happens to our data?</summary><p>It is used only for your project, under the agreed confidentiality terms, our <a href="../privacy.html">Privacy Policy</a> and any NDA. Nothing is published without your written approval.</p></details>
+        <details><summary>Do you work outside the UAE?</summary><p>Dubai and the UAE come first. We take selected UK and Singapore projects remotely. Local price comparisons are included only where we have enough current data.</p></details>
       </div>
       <form class="form" id="enq" novalidate>
         <span class="label" style="color:var(--brass-l)">Contact</span>
@@ -318,7 +376,7 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
         <p class="s">We reply within one working day.</p>
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
         <div class="row"><label><span>Name</span><input name="name" required autocomplete="name"></label><label><span>Email</span><input type="email" name="email" required autocomplete="email"></label></div>
-        <div class="row"><label><span>Restaurant and city</span><input name="venue" placeholder="e.g. Olive Room, Dubai"></label><label><span>Interested in</span><select name="interest" id="interest"><option>Menu Profit Boost Audit</option><option>Menu Engineering Sprint</option><option>Retainer</option><option>Not sure yet</option></select></label></div>
+        <div class="row"><label><span>Restaurant and city</span><input name="venue" placeholder="e.g. Olive Room, Dubai"></label><label><span>Interested in</span><select name="interest" id="interest"><option>Menu Profit Boost Audit</option><option>Menu Engineering Sprint</option><option>Not sure yet</option></select></label></div>
         <label><span>Anything we should know? (optional)</span><textarea name="message"></textarea></label>
         <button class="btn light" type="submit">Send</button>
         <div class="ok" id="ok" role="status"></div>
@@ -360,6 +418,78 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
   });
   var hero=document.querySelector(".hero .btn"),m=document.getElementById("mcta");
   if("IntersectionObserver" in window&&hero)new IntersectionObserver(function(e){m.classList.toggle("on",!e[0].isIntersecting&&e[0].boundingClientRect.top<0);}).observe(hero);
+})();
+</script>
+<script src="../assets/js/vendor/lenis-1.3.27.min.js" defer></script>
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Smooth wheel scrolling (desktop only; touch stays native). Off for reduced motion. */
+  window.addEventListener("load", function(){
+    if (reduce || !window.Lenis) return;
+    try { window.lenis = new Lenis({ autoRaf:true, lerp:0.12, smoothWheel:true, syncTouch:false, anchors:true }); } catch(e) {}
+  });
+
+  /* Reveal once on scroll */
+  var rv = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, { rootMargin:"0px 0px -12% 0px" });
+    rv.forEach(function(el){ io.observe(el); });
+  } else rv.forEach(function(el){ el.classList.add("in"); });
+
+  /* Menu X-ray illustration */
+  var fig = document.getElementById("xr"); if (!fig) return;
+  var NS = "http://www.w3.org/2000/svg";
+  var C = { Star:"#1E3027", Plowhorse:"#8a6a33", Puzzle:"#3f5e75", Dog:"#A65E49" };
+  var dishes = [
+    ["Grilled chicken","72","Star",530,98],
+    ["Classic burger","68","Plowhorse",548,290],
+    ["Sea bass","96","Puzzle",332,112],
+    ["Truffle fries","32","Star",482,160],
+    ["Burrata salad","58","Dog",352,300],
+    ["Lemon tart","40","Puzzle",392,170],
+    ["Iced latte","26","Plowhorse",478,336]
+  ];
+  var gl = fig.querySelector(".lines"), gd = fig.querySelector(".dots"), ticks = [], dots = [];
+  function el(n, a){ var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  dishes.forEach(function(d, i){
+    var y = 104 + i * 44;
+    var t = el("text", { x:36, y:y, "class":"t-d" }); t.textContent = d[0]; gl.appendChild(t);
+    var pr = el("text", { x:204, y:y, "text-anchor":"end", "class":"t-p" }); pr.textContent = d[1]; gl.appendChild(pr);
+    gl.appendChild(el("line", { x1:36, y1:y+14, x2:204, y2:y+14, stroke:"#1c1915", "stroke-opacity":".08" }));
+    var tk = el("rect", { x:24, y:y-9, width:3, height:11, fill:C[d[2]], "class":"tick" }); gl.appendChild(tk); ticks.push(tk);
+    var dot = el("circle", { cx:d[3], cy:d[4], r:7, fill:C[d[2]], "class":"dot" });
+    var ttl = el("title", {}); ttl.textContent = d[0] + ": " + d[2]; dot.appendChild(ttl);
+    dot.dataset.dx = (212 - d[3]); dot.dataset.dy = (y - 4 - d[4]);
+    gd.appendChild(dot); dots.push(dot);
+  });
+  var timers = [];
+  function reset(){
+    timers.forEach(clearTimeout); timers = [];
+    fig.classList.remove("run","done");
+    ticks.forEach(function(t){ t.classList.remove("on"); });
+    dots.forEach(function(d){ d.style.transition = "none"; d.classList.remove("on"); d.style.transform = "translate(" + d.dataset.dx + "px," + d.dataset.dy + "px)"; });
+    void fig.offsetWidth;
+    dots.forEach(function(d){ d.style.transition = ""; });
+  }
+  function finalState(){ fig.classList.add("done"); ticks.forEach(function(t){ t.classList.add("on"); }); dots.forEach(function(d){ d.classList.add("on"); d.style.transform = "none"; }); }
+  function play(){
+    reset(); fig.classList.add("run");
+    dishes.forEach(function(d, i){
+      var at = 260 + i * 330; /* scan reaches each line */
+      timers.push(setTimeout(function(){ ticks[i].classList.add("on"); dots[i].classList.add("on"); }, at));
+      timers.push(setTimeout(function(){ dots[i].style.transform = "none"; }, at + 260));
+    });
+    timers.push(setTimeout(function(){ fig.classList.add("done"); }, 260 + dishes.length * 330 + 900));
+  }
+  if (reduce || !("IntersectionObserver" in window)) { finalState(); }
+  else {
+    reset();
+    var io2 = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ play(); io2.disconnect(); } }, { threshold:.45 });
+    io2.observe(fig);
+  }
+  document.getElementById("xrReplay").addEventListener("click", function(){ reduce ? finalState() : play(); });
 })();
 </script>
 </body>
