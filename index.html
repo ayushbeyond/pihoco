@@ -368,7 +368,7 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
         <p style="margin-top:20px">Eight years across hospitality taught me that a great guest experience begins long before a dish reaches the table. It starts with the right decisions behind the menu.</p>
         <p>A menu is where guest preferences, culinary creativity, kitchen efficiency and profitability meet. PIHOCO helps restaurants get that balance right, so teams make smarter decisions and the business stays sustainable.</p>
         <p class="quote">“Success is simple: help businesses perform better, help professionals grow, and make every guest experience count.”</p>
-        <p class="sig"><b>Piyush Raikwar</b> · Founder, PIHOCO<br><span>Trained at ITC Grand Central, Mumbai · former chef de partie and sous chef</span></p>
+        <p class="sig"><b>Piyush Raikwar</b> · Founder, PIHOCO</p>
       </div>
     </div>
   </section>
@@ -430,7 +430,7 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
     var fd=new FormData(f);fd.append("access_key","7b083011-54a9-4b02-805a-05c1f4c111e7");fd.append("subject","PIHOCO enquiry: "+f.elements.namedItem("interest").value);fd.append("from_name","PIHOCO website");
     var btn=f.querySelector("button");btn.disabled=true;btn.textContent="Sending…";
     fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:fd}).then(function(r){return r.json();}).then(function(j){
-      ok.style.display="block";ok.textContent=j.success?"Thank you. We'll reply within one working day.":"That didn't send. Please email contact@pihoco.com.";if(j.success)f.reset();
+      if(j.success&&window.pihocoTrack)pihocoTrack("form_sent",f.elements.namedItem("interest").value);ok.style.display="block";ok.textContent=j.success?"Thank you. We'll reply within one working day.":"That didn't send. Please email contact@pihoco.com.";if(j.success)f.reset();
     }).catch(function(){ok.style.display="block";ok.textContent="That didn't send. Please email contact@pihoco.com.";}).finally(function(){btn.disabled=false;btn.textContent="Send";});
   });
   var hero=document.querySelector(".hero .btn"),m=document.getElementById("mcta");
@@ -508,6 +508,15 @@ footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
   }
   document.getElementById("xrReplay").addEventListener("click", function(){ reduce ? finalState() : play(); });
 })();
+</script>
+<script>
+/* Anonymous click counting: no personal data, no cookies, no IP stored. */
+(function(){var U="https://appccwwupxkfzzuawzzr.supabase.co/rest/v1/site_events",K="sb_publishable_QhuV3Qj4cbQpjDWorB84FQ_kY4roZeO";
+window.pihocoTrack=function(ev,label){try{fetch(U,{method:"POST",keepalive:true,headers:{apikey:K,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({event:ev,page:location.pathname.slice(0,80),label:String(label||"").slice(0,80)})}).catch(function(){});}catch(e){}};
+document.addEventListener("click",function(e){var a=e.target.closest("a,button");if(!a)return;var h=a.getAttribute("href")||"",s=a.closest("section,header,footer,.mcta"),w=s?(s.id||s.className.split(" ")[0]||s.tagName.toLowerCase()):"page",ev=null;
+if(/app\/start/.test(h))ev="cta_free_check";else if(a.dataset.pick||/#contact|#enquire/.test(h))ev="cta_contact";else if(/^mailto:/.test(h))ev="cta_email";else if(/menu-xray/.test(h))ev="cta_xray_page";else if(/\.pdf$/.test(h))ev="download_pdf";else if(a.dataset.cur)ev="currency_"+a.dataset.cur.toLowerCase();else if(a.id==="xrReplay")ev="xr_replay";
+if(ev)pihocoTrack(ev,w);},true);
+pihocoTrack("page_view",document.referrer?(new URL(document.referrer)).hostname:"direct");})();
 </script>
 </body>
 </html>

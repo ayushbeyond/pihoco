@@ -3,258 +3,386 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Menu engineering for cafés & bakeries — PIHOCO</title>
-<meta name="description" content="Café margin hides in drink sizes, milks and syrups, the bakery counter and the second item at the till. PIHOCO reads your sales item by item and tells you what to change.">
+<title>PIHOCO for cafés — the margin is in the extras</title>
+<meta name="description" content="Menu engineering for cafés, bakeries and dessert brands: drink sizes, milks and extras, bakery sell-through, add-ons and delivery pricing. Start with a free menu check.">
 <link rel="canonical" href="https://pihoco.com/cafes.html">
 <meta name="theme-color" content="#f3eee6">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pihoco.com/cafes.html">
 <meta property="og:site_name" content="PIHOCO">
-<meta property="og:title" content="Menu engineering for cafés & bakeries — PIHOCO">
-<meta property="og:description" content="Café margin hides in drink sizes, milks and syrups, the bakery counter and the second item at the till. PIHOCO reads your sales item by item and tells you what to change.">
+<meta property="og:title" content="PIHOCO for cafés — the margin is in the extras">
+<meta property="og:description" content="Menu engineering for cafés, bakeries and dessert brands: drink sizes, milks and extras, bakery sell-through, add-ons and delivery pricing. Start with a free menu check.">
 <meta property="og:image" content="https://pihoco.com/assets/img/og-share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/newsreader-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css">
-<script>document.documentElement.classList.add('js');</script>
+<style>
+@font-face{font-family:"Newsreader";src:url("assets/fonts/newsreader-latin-standard-normal.woff2") format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("assets/fonts/newsreader-latin-standard-italic.woff2") format("woff2");font-weight:200 800;font-style:italic;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url("assets/fonts/instrument-sans-latin-wght-normal.woff2") format("woff2");font-weight:400 700;font-display:swap}
+:root{--bg:#f3eee6;--bg2:#ebe4d8;--paper:#faf7f2;--ink:#1c1915;--night:#171411;--muted:#6a6157;--line:rgba(28,25,21,.14);--brass:#946f3e;--brass-l:#d2b487;--gain:#1E3027;--leak:#A65E49;
+  --serif:"Newsreader",Georgia,serif;--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%;display:block;height:auto}
+h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.02em;margin:0}
+em{font-style:italic;color:var(--brass)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.label{font:600 11px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.h2{font-size:clamp(34px,4.2vw,54px);line-height:1.05;margin-top:14px}
+.lede{font-size:18px;color:var(--muted);max-width:54ch;margin:18px 0 0}
+section{padding:112px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);padding:17px 26px;font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.btn:hover{background:var(--brass);border-color:var(--brass)}
+.btn.ghost{background:transparent;color:var(--ink)}.btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.btn.light{background:var(--bg);color:var(--ink);border-color:var(--bg)}.btn.light:hover{background:var(--brass-l);border-color:var(--brass-l)}
+.tlink{font-size:14px;color:var(--muted);text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.num{font-variant-numeric:tabular-nums}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(243,238,230,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+.nav img{height:17px;width:auto}
+.nav nav{display:flex;align-items:center;gap:28px;font-size:14px}
+.nav nav a{text-decoration:none;color:var(--muted)}.nav nav a:hover{color:var(--ink)}
+.nav .btn{padding:12px 18px;font-size:11px;color:var(--bg)}
+
+/* hero */
+.hero{padding:0;position:relative;overflow:hidden;background:var(--night);color:var(--bg);min-height:min(88vh,820px);display:flex;align-items:flex-end}
+.hero picture,.hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 30%}
+.hero picture img{filter:brightness(.9) saturate(.88)}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 38% 42% at 100% 100%,rgba(23,20,17,.92),rgba(23,20,17,0) 100%),linear-gradient(90deg,rgba(23,20,17,.93) 0%,rgba(23,20,17,.78) 40%,rgba(23,20,17,.18) 72%,rgba(23,20,17,.05) 100%),linear-gradient(0deg,rgba(23,20,17,.72),rgba(23,20,17,0) 40%)}
+.hero .wrap{position:relative;z-index:1;padding-top:120px;padding-bottom:72px;width:100%}
+.hero .label{color:var(--brass-l)}
+.hero h1{font-size:clamp(46px,6.4vw,92px);line-height:.98;margin:22px 0 0;max-width:12ch}
+.hero h1 em{color:var(--brass-l)}
+.hero p{font-size:19px;color:#d9d1c4;max-width:46ch;margin:24px 0 0}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:36px}
+.hero .btn.ghost{color:var(--bg);border-color:rgba(243,238,230,.5)}.hero .btn.ghost:hover{background:var(--bg);color:var(--ink)}
+.trust{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;padding-top:20px;border-top:1px solid rgba(243,238,230,.18);font-size:13px;color:#b3a898}
+.trust b{color:var(--bg);font-weight:500}
+
+/* matrix */
+.matrix .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:72px;align-items:center}
+.plates{position:relative}
+.plates img{width:100%;aspect-ratio:1376/768;object-fit:cover}
+.plates span{position:absolute;font:600 10px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;background:var(--paper);padding:7px 9px}
+.quad{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1px solid var(--ink)}
+.quad div{padding:20px 20px 20px 0;border-bottom:1px solid var(--line)}
+.quad div:nth-child(odd){border-right:1px solid var(--line)}
+.quad div:nth-child(even){padding-left:20px}
+.quad b{display:block;font:400 22px/1.2 var(--serif)}
+.quad small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.quad i{font-style:normal;font:600 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;display:inline-block;margin-top:10px}
+.c-star{color:var(--gain)}.c-plow{color:#8a6a33}.c-puz{color:#3f5e75}.c-dog{color:var(--leak)}
+
+/* audit */
+.audit{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.audit .top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:72px;align-items:end}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:64px}
+.flow div{border-top:1px solid var(--ink);padding-top:20px}
+.flow .n{font:300 15px/1 var(--serif);color:var(--brass)}
+.flow h3{font-size:26px;margin:10px 0 12px}
+.flow ul{list-style:none;padding:0;margin:0;color:var(--muted);font-size:15px}
+.flow li{padding:5px 0}
+.changes{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:56px;margin-top:80px;align-items:center}
+.changes img{box-shadow:0 30px 60px -30px rgba(28,25,21,.45);max-width:300px}
+.changes ol{list-style:none;padding:0;margin:20px 0 0;counter-reset:c}
+.changes li{counter-increment:c;display:flex;gap:18px;padding:14px 0;border-bottom:1px solid var(--line);font:300 24px/1.3 var(--serif)}
+.changes li::before{content:counter(c,decimal-leading-zero);font:600 11px/2.4 var(--sans);letter-spacing:.14em;color:var(--brass)}
+.assure{display:flex;gap:24px;flex-wrap:wrap;margin-top:28px;font-size:13px;color:var(--muted)}
+.assure span::before{content:"✓ ";color:var(--gain);font-weight:600}
+
+/* pricing */
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.cur{display:inline-flex;border:1px solid var(--line)}
+.cur button{all:unset;cursor:pointer;padding:9px 14px;font:600 11px/1 var(--sans);letter-spacing:.14em;color:var(--muted)}
+.cur button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:48px;border:1px solid var(--line)}
+.tier{padding:34px 30px;background:var(--paper);display:flex;flex-direction:column}
+.tier+.tier{border-left:1px solid var(--line)}
+.tier.hi{background:var(--night);color:var(--bg)}
+.tier.hi .label{color:var(--brass-l)}
+.tier h3{font-size:30px;margin:12px 0 0}
+.price{font:300 40px/1.1 var(--serif);margin:18px 0 2px;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:10px}
+.price span,.price s{white-space:nowrap}
+.price s{font-size:18px;color:var(--muted)}
+.tier .note{font-size:13px;color:var(--muted);margin:0}
+.tier.hi .note,.tier.hi li{color:#d9d1c4}
+.tier ul{list-style:none;padding:0;margin:22px 0 28px;font-size:14.5px;flex:1}
+.tier li{padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:12px}
+.tier.hi li{border-color:rgba(243,238,230,.12)}
+.tier li::before{content:"✓";color:var(--gain);font-weight:600}.tier.hi li::before{color:var(--brass-l)}
+.tier .btn{width:100%}
+.pnote{font-size:13px;color:var(--muted);margin-top:18px}
+
+/* founder */
+.founder{background:var(--bg2);border-top:1px solid var(--line)}
+.founder .wrap{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:72px;align-items:center}
+.founder img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%}
+.founder h2{font-size:clamp(30px,3.4vw,44px);line-height:1.15;margin-top:16px}
+.founder p{color:var(--muted);max-width:56ch}
+.founder .sig{margin-top:22px;font-size:14px;line-height:1.7}.founder .sig b{font-weight:500;color:var(--ink)}.founder .sig span{font-size:13px}
+.founder .quote{font:italic 300 22px/1.4 var(--serif);color:var(--ink);border-left:2px solid var(--brass);padding-left:18px;margin:26px 0 0;max-width:46ch}
+
+/* faq + contact */
+.close .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:start}
+details{border-top:1px solid var(--line)}details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:20px 0;font:400 20px/1.3 var(--serif)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--brass);font:300 24px/1 var(--sans);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 20px;color:var(--muted);font-size:15px}
+.form{background:var(--night);color:var(--bg);padding:40px}
+.form h2{font-size:clamp(30px,3.2vw,42px);line-height:1.1}
+.form h2 em{color:var(--brass-l)}
+.form p.s{color:#b3a898;font-size:14px;margin:12px 0 26px}
+.form label{display:block;margin-bottom:18px}
+.form label span{display:block;font:600 10px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#b3a898;margin-bottom:6px}
+.form input,.form select,.form textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(243,238,230,.3);color:var(--bg);font:inherit;padding:8px 0;outline:none;border-radius:0}
+.form select option{color:var(--ink)}
+.form input:focus,.form select:focus,.form textarea:focus{border-bottom-color:var(--brass-l)}
+.form textarea{min-height:70px;resize:vertical}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form .btn{width:100%;margin-top:6px}
+.form .alt{font-size:13px;color:#b3a898;margin-top:16px}
+.form .alt a{color:var(--bg)}
+.form .ok{display:none;padding:18px;border:1px solid var(--brass-l);margin-top:14px;font-size:14px}
+.hp{position:absolute;left:-9999px}
+
+footer{background:var(--night);color:#8f857a;padding:40px 0;font-size:13px;border-top:1px solid rgba(243,238,230,.1)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer a{color:#cfc6ba;text-decoration:none}footer a:hover{color:var(--bg)}
+
+.mcta{display:none}
+
+/* X-ray illustration */
+.xr{margin:0}
+.xr svg{width:100%;height:auto;display:block;overflow:visible}
+.xr .t-k{font:600 9px/1 var(--sans);letter-spacing:.24em;fill:#6a6157}
+.xr .t-d{font:400 13px/1 var(--serif);fill:#1c1915}
+.xr .t-p{font:500 11px/1 var(--sans);fill:#6a6157;font-variant-numeric:tabular-nums}
+.xr .t-ax{font:600 8.5px/1 var(--sans);letter-spacing:.2em;fill:#6a6157}
+.xr .t-q{font:600 9.5px/1 var(--sans);letter-spacing:.2em}
+.xr .t-a{font:italic 400 12px/1 var(--serif);fill:#6a6157}
+.xr .scan{transform:translateY(22px);opacity:0}
+.xr.run .scan{opacity:1;animation:xrScan 2.6s cubic-bezier(.45,0,.35,1) forwards}
+@keyframes xrScan{from{transform:translateY(22px)}to{transform:translateY(418px)}}
+.xr .tick{opacity:0;transition:opacity .3s}
+.xr .tick.on{opacity:1}
+.xr .dot{opacity:0;transition:transform .95s cubic-bezier(.65,0,.25,1),opacity .25s}
+.xr .dot.on{opacity:1}
+.xr .ql text,.xr .qb{opacity:.0;transition:opacity .6s}
+.xr.done .ql text{opacity:1}.xr.done .qb{opacity:1}
+.xr figcaption{font-size:12px;color:var(--muted);margin-top:12px;display:flex;justify-content:space-between;gap:12px}
+.replay{all:unset;cursor:pointer;font:600 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:3px}
+.replay:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+/* reveal on scroll: once, subtle, below the hero only */
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .flow>div{border-top-color:transparent;position:relative}
+.js .flow>div::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.65,0,.25,1)}
+.js .flow.in>div::before{transform:scaleX(1)}
+.js .flow.in>div:nth-child(2)::before{transition-delay:.25s}.js .flow.in>div:nth-child(3)::before{transition-delay:.5s}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none}.js .flow>div::before{transform:none}.xr .scan{display:none}.xr .dot,.xr .tick,.xr .ql text,.xr .qb{opacity:1!important;transition:none}}
+@media (max-width:960px){
+  section{padding:80px 0}
+  .matrix .wrap,.audit .top,.changes,.founder .wrap,.close .wrap{grid-template-columns:1fr;gap:44px}
+  .flow,.tiers{grid-template-columns:1fr}
+  .tier+.tier{border-left:0;border-top:1px solid var(--line)}
+  .nav nav a:not(.btn){display:none}
+  .founder img{max-width:340px}
+  .changes img{max-width:220px}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .hero{min-height:0;display:block}
+  .hero picture{position:relative;display:block;height:auto}
+  .hero picture img{position:relative;height:auto;aspect-ratio:1/1;object-position:62% 32%;filter:none}
+  .hero::after{inset:0 0 auto 0;height:100vw;background:linear-gradient(0deg,#171411 0%,rgba(23,20,17,0) 42%)}
+  .hero .wrap{padding-top:0;margin-top:-64px;padding-bottom:48px}
+  .hero h1{font-size:44px}
+  .hero .btn{width:100%}
+  .trust{gap:10px 20px}
+  .quad div{padding-right:12px}.quad div:nth-child(even){padding-left:12px}.quad b{font-size:19px}
+  .changes li{font-size:20px}
+  .tier,.form{padding:28px 20px}
+  .form .row{grid-template-columns:1fr;gap:0}
+  .mcta{display:block;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--night);transform:translateY(110%);transition:transform .25s}
+  .mcta.on{transform:none}.mcta .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+
+.phero{padding:96px 0 88px;border-bottom:1px solid var(--line)}
+.phero h1{font-size:clamp(44px,6vw,84px);line-height:1;margin:20px 0 0;max-width:14ch}
+.phero p.lede{font-size:19px}
+.phero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.levers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:56px}
+.lever{border-top:1px solid var(--ink);padding-top:18px}
+.lever .n{font:600 10.5px/1 var(--sans);letter-spacing:.18em;color:var(--brass);text-transform:uppercase}
+.lever h3{font-size:24px;margin:10px 0 10px;line-height:1.2}
+.lever p{color:var(--muted);font-size:14.5px;margin:0}
+.cup{background:var(--night);color:var(--bg)}
+.cup .label{color:var(--brass-l)}.cup .lede{color:#b3a898}
+.cup .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;margin-top:44px;align-items:start}
+.cf{display:grid;grid-template-columns:1fr 1fr;gap:20px 24px}
+.cf label{display:block}
+.cf span{display:block;font:600 10px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#b3a898;margin-bottom:6px}
+.cf input{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(243,238,230,.3);color:var(--bg);font:400 20px/1.2 var(--serif);padding:6px 0;outline:none;border-radius:0}
+.cf input:focus{border-bottom-color:var(--brass-l)}
+.res{border:1px solid rgba(243,238,230,.18)}
+.res div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 22px;border-bottom:1px solid rgba(243,238,230,.12)}
+.res div:last-child{border-bottom:0;background:rgba(210,180,135,.08)}
+.res span{font-size:13px;color:#b3a898}
+.res b{font:300 28px/1 var(--serif);color:var(--bg);font-variant-numeric:tabular-nums}
+.res div:last-child b{color:var(--brass-l)}
+.cup .note2{font-size:12.5px;color:#8f857a;margin-top:14px}
+.caudit .head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:56px;align-items:end}
+.cprice{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:56px;padding:26px 30px;background:var(--night);color:var(--bg)}
+.cprice .price{margin:0;color:var(--bg)}
+.cprice .label{color:var(--brass-l)}
+.cprice p{margin:4px 0 0;color:#b3a898;font-size:13px}
+.final2{background:var(--bg2);text-align:center;border-top:1px solid var(--line)}
+.final2 h2{font-size:clamp(34px,4.4vw,56px);line-height:1.05}
+.final2 .lede{margin-left:auto;margin-right:auto}
+@media (max-width:960px){.levers{grid-template-columns:1fr 1fr}.cup .grid,.caudit .head{grid-template-columns:1fr;gap:40px}}
+@media (max-width:600px){.levers{grid-template-columns:1fr}.cf{grid-template-columns:1fr 1fr;gap:18px}.phero{padding:56px 0 64px}.phero .btn{width:100%}.cprice{padding:24px 20px}.cprice .btn{width:100%}}
+
+</style>
 </head>
 <body>
-
-<!-- Logo: exact paths from assets/brand/PIHOCOLOGO.svg -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="pihoco-logo" viewBox="44 88 1680 284"><path d="M90.31,95.76c45.79,1.93,93.64-2.55,139.2-.05,53.81,2.95,104.03,34.51,88.8,95.44-18.02,72.07-109.33,48.37-156.03,81.76l-18.4,16.21c4.27-26.99,22.12-50.75,43.98-66.41,22.08-15.81,71.06-29.19,74.76-59.81,6.75-55.87-87.98-65.14-126-60.68-1.9.22-3.36.16-4.51,2.03v261.96h-41.81V95.76Z"/><path d="M526.7,227.72h145.03V95.76h40.5v270.46h-40.5v-128.04h-145.03v124.78c0,.43-1.73,1.98-1.31,3.27h-40.5V97.72l1.96-1.96h37.89l1.96,1.96v130Z"/><path d="M1715.02,193.74c-18.51-74.71-95.14-107.86-166.86-101.52-105.95,9.38-183.3,132.3-110.16,223.05,96.68,119.95,315.91,35.41,277.02-121.54ZM1568.67,363.58c-150.5,7.07-154.21-248.31-17.9-262.21,161.53-16.48,167.06,255.21,17.9,262.21Z"/><path d="M1067.6,211.41c-7.24-84.05-91.99-125.95-168.79-119.18-120.37,10.62-192.05,156.49-92.52,242,100.72,86.52,273.41,17.72,261.31-122.82ZM919.3,363.58c-149.59,9.73-157.01-247.41-19.19-262.21,160.3-17.22,168.23,252.53,19.19,262.21Z"/><path d="M1246.35,92.23c43.93-3.89,98.51,6.86,126.97,43.41,10.02,12.87,1.8,14.61-9.6,21.36-27.85-40.33-75.25-64.59-124.74-53.85-105.65,22.94-120.91,196.69-30.28,246.76,43.15,23.84,100.96,16.2,137.23-16.99,8.03-7.34,12.98-16.41,20.41-24.09l10.93,8.44c-20.67,24.54-53.58,43.74-84.91,50.93-103.18,23.68-213.93-64.01-178.7-173.47,17.39-54.03,76.65-97.53,132.69-102.49Z"/><polygon points="409.11 366.21 367.3 366.21 367.3 95.76 407.15 95.76 409.11 97.72 409.11 366.21"/></symbol>
-  <symbol id="pihoco-seal" viewBox="0 0 200 200">
-    <circle cx="100" cy="100" r="97" fill="none" stroke="currentColor" stroke-width=".8"/>
-    <circle cx="100" cy="100" r="68" fill="none" stroke="currentColor" stroke-width=".8"/>
-    <path id="seal-arc" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0" fill="none"/>
-    <text fill="currentColor" font-family="Instrument Sans, sans-serif" font-size="10.5" font-weight="500" letter-spacing="3"><textPath href="#seal-arc" textLength="508" lengthAdjust="spacing">PIHOCO · MENU ENGINEERING · F&amp;B ADVISORY ·</textPath></text>
-    <g transform="translate(100 101) scale(.17) translate(-184 -230)"><path fill="currentColor" d="M90.31,95.76c45.79,1.93,93.64-2.55,139.2-.05,53.81,2.95,104.03,34.51,88.8,95.44-18.02,72.07-109.33,48.37-156.03,81.76l-18.4,16.21c4.27-26.99,22.12-50.75,43.98-66.41,22.08-15.81,71.06-29.19,74.76-59.81,6.75-55.87-87.98-65.14-126-60.68-1.9.22-3.36.16-4.51,2.03v261.96h-41.81V95.76Z"/></g>
-  </symbol>
-</svg>
-
-<a class="skip" href="#main">Skip to content</a>
-
-<header class="nav nav--page is-solid" data-nav>
-  <a class="nav__brand" href="index.html" aria-label="PIHOCO home"><svg class="logo" aria-hidden="true"><use href="#pihoco-logo"/></svg></a>
-  <nav class="nav__links" aria-label="Primary">
-    <a href="index.html#audit">The Audit</a>
-    <a href="index.html#pricing">Pricing</a>
-    <a href="/app/">Free X-ray</a>
-    <a href="index.html#method">Method</a>
-    <a href="cafes.html">For cafés</a>
-    <a href="index.html#founder">Founder</a>
-  </nav>
-  <label class="country"><span class="sr-only">Your country</span><select data-country aria-label="Choose your country for prices"><option value="AED">UAE · AED</option><option value="GBP">UK · GBP</option><option value="SGD">Singapore · SGD</option><option value="USD">Elsewhere · USD</option></select></label>
-  <a class="nav__cta" href="#scorecard">Free menu scorecard</a>
-  <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle><span class="sr-only">Open menu</span><i></i><i></i></button>
-</header>
-
-<div class="mmenu" id="mobile-menu" data-menu hidden>
-  <nav aria-label="Mobile">
-    <a href="index.html#audit">The Audit</a>
-    <a href="index.html#pricing">Pricing</a>
-    <a href="index.html#method">Method</a>
-    <a href="cafes.html">For cafés</a>
-    <a href="index.html#founder">Founder</a>
-    <a href="/app/">Free menu X-ray</a>
-    <a href="#scorecard">Free menu scorecard</a>
-  </nav>
-  <p class="mmenu__country"><label class="country"><span class="sr-only">Your country</span><select data-country aria-label="Choose your country for prices"><option value="AED">UAE · AED</option><option value="GBP">UK · GBP</option><option value="SGD">Singapore · SGD</option><option value="USD">Elsewhere · USD</option></select></label></p>
-</div>
-
-<main id="main">
-
-  <section class="page-hero page-hero--split" aria-labelledby="cafe-title">
-    <div>
-    <p class="label" data-reveal>For cafés, bakeries &amp; dessert brands</p>
-    <h1 class="h1" id="cafe-title" data-reveal>In a café, the margin is in <em>the extras.</em></h1>
-    <p class="lede" data-reveal>Drink sizes, milks and syrups, the bakery counter and the second item at the till decide what a café earns. We read your sales item by item, modifiers included, and tell you what to change.</p>
-    <div class="hero__ctas" data-reveal><a class="btn" href="#scorecard">Get a free menu scorecard</a><a class="ladder__cta" href="#cafe-audit">The café audit</a></div>
-    </div>
-    <figure class="page-hero__img" data-reveal><img src="assets/img/menu-card.webp" width="600" height="750" alt="An engineered menu on a table, with the best-earning item boxed as the recommendation." fetchpriority="high"></figure>
-  </section>
-
-  <section class="leaks" aria-labelledby="leaks-title">
-    <h2 class="sr-only" id="leaks-title">Where café margin hides</h2>
-    <ol data-reveal>
-      <li>
-        <p class="label">01 · Drinks</p>
-        <h3>The size ladder and the milk fridge</h3>
-        <p>Most of the till is coffee, so small gaps repeat hundreds of times a week.</p>
-        <ul><li>Does the large earn more cash than the regular, or just cost more?</li><li>Do oat milk, extra shots and syrups cover what they cost?</li><li>Are signature drinks earning more than a flat white, or just taking longer?</li></ul>
-      </li>
-      <li>
-        <p class="label">02 · Bakery counter</p>
-        <h3>What sells out, and what gets binned</h3>
-        <p>Bakes look profitable on paper until you count what is left at close.</p>
-        <ul><li>Sell-through by item and by day of the week</li><li>Par levels: how many of each to bake</li><li>Counter order: what guests see first</li></ul>
-      </li>
-      <li>
-        <p class="label">03 · Add-ons &amp; pairings</p>
-        <h3>The second item</h3>
-        <p>How often a coffee leaves with something to eat is one of the biggest levers a café has.</p>
-        <ul><li>Attach rate: food with drinks, by daypart</li><li>Breakfast and lunch bundles that lift the bill without cutting margin</li><li>One line staff can say at the till</li></ul>
-      </li>
-      <li>
-        <p class="label">04 · Delivery &amp; takeaway</p>
-        <h3>Same drink, different cost</h3>
-        <p>Commission, cups, lids and bags turn a good dine-in price into a thin delivery one.</p>
-        <ul><li>A separate delivery price list</li><li>Packaging cost per item</li><li>Which items travel badly and should come off the app</li></ul>
-      </li>
-    </ol>
-  </section>
-
-  <!-- FREE TOOL: MENU X-RAY APP -->
-  <section class="tool" id="free-xray" aria-labelledby="tool-title">
-    <div class="tool__copy">
-      <p class="label" data-reveal>Free tool · For a limited time</p>
-      <h2 class="h2" id="tool-title" data-reveal>X-ray your own menu <em>in 60 seconds.</em></h2>
-      <p class="lede" data-reveal>Paste it, upload a PDF or snap a photo. You get a score out of 100, three fixes ranked by the money behind them, and how your coffee and bakery prices sit against Dubai cafés: the index already covers cappuccino, flat white, Spanish latte, croissant, açaí bowl and more.</p>
-      <ol class="tool__steps" data-reveal>
-        <li><span>01</span>Add your menu and city. Covers and average bill are optional and never leave your browser.</li>
-        <li><span>02</span>Check the dishes and prices we read. Fix anything in a tap.</li>
-        <li><span>03</span>Get your score, three fixes, suggested descriptions and a money estimate you can adjust.</li>
-      </ol>
-      <div class="tool__cta" data-reveal>
-        <a class="btn" href="/app/start">Start the free X-ray</a>
-        <a class="tool__link" href="/app/price-index">See the Dubai price index →</a>
-      </div>
-      <dl class="tool__data" data-tool-stats data-reveal>
-        <div><dt>Menu prices</dt><dd data-stat="prices">560</dd></div>
-        <div><dt>Public menus</dt><dd data-stat="menus">14</dd></div>
-        <div><dt>Dishes with 5+ local prices</dt><dd data-stat="comparable_dishes">22</dd></div>
-      </dl>
-      <p class="note">Collected from venues' own websites in Dubai. Restaurant inflation from the UK ONS and US BLS. No AI reads your menu: every finding comes from published rules, with the evidence shown.</p>
-    </div>
-    <figure class="tool__card" aria-label="Example result" data-reveal>
-      <div class="tool__cover">
-        <p class="tool__over">Menu X-ray · Example</p>
-        <p class="tool__score">56<small>/100</small></p>
-        <p class="tool__verdict">Busy, but not earning in the right places.</p>
-        <p class="tool__money">Money on the table · scenario<b>+AED 2,300–4,950 a month</b></p>
-      </div>
-      <ol class="tool__fixes">
-        <li><span>01</span><b>Build the dessert close</b><i>+AED 1,250–3,200 / month</i></li>
-        <li><span>02</span><b>Add an add-on line</b><i>+AED 1,050–2,650 / month</i></li>
-        <li><span>03</span><b>Add a premium anchor to mains</b><i>Raises the value of every mid-priced dish</i></li>
-      </ol>
-      <figcaption class="note">Illustrative result from a sample menu, not client data.</figcaption>
-    </figure>
-  </section>
-
-  <section class="cupcalc" aria-labelledby="calc-title">
-    <div class="cupcalc__grid">
-      <div>
-        <p class="label" data-reveal>Cup check</p>
-        <h2 class="h2" id="calc-title" data-reveal>What does one latte <em>actually leave?</em></h2>
-        <p class="lede" data-reveal>Put in your own numbers, in your own currency. Then see what a small price or portion change is worth over a week.</p>
-        <p class="note" data-reveal>Nothing you type here leaves your browser.</p>
-      </div>
-      <form class="calc" data-calc data-reveal onsubmit="return false">
-        <div class="calc__row"><label for="k-price">Menu price<small>As shown to guests</small></label><input id="k-price" type="number" inputmode="decimal" step="0.1" min="0" value="18"></div>
-        <div class="calc__row"><label for="k-tax">Tax included in price<small>% · e.g. VAT</small></label><input id="k-tax" type="number" inputmode="decimal" step="0.5" min="0" max="30" value="5"></div>
-        <div class="calc__row"><label for="k-coffee">Coffee<small>Cost of the shot(s)</small></label><input id="k-coffee" type="number" inputmode="decimal" step="0.05" min="0" value="1.6"></div>
-        <div class="calc__row"><label for="k-milk">Milk<small>Cost per drink</small></label><input id="k-milk" type="number" inputmode="decimal" step="0.05" min="0" value="1.3"></div>
-        <div class="calc__row"><label for="k-pack">Cup, lid &amp; sleeve<small>0 for dine-in</small></label><input id="k-pack" type="number" inputmode="decimal" step="0.05" min="0" value="0.9"></div>
-        <div class="calc__row"><label for="k-cups">Sold per week</label><input id="k-cups" type="number" inputmode="numeric" step="10" min="0" value="600"></div>
-        <dl class="calc__out" aria-live="polite">
-          <div><dt>Left per cup</dt><dd data-k="cm">—</dd></div>
-          <div><dt>Cost as % of net price</dt><dd data-k="pct">—</dd></div>
-          <div><dt>Left per week</dt><dd data-k="week">—</dd></div>
-          <div><dt>+1.00 on price, per week</dt><dd data-k="up">—</dd></div>
-        </dl>
-        <p class="calc__verdict" data-k="say"></p>
-      </form>
-    </div>
-  </section>
-
-  <section class="audit" id="cafe-audit" aria-labelledby="ca-title">
-    <div class="audit__head">
-      <p class="label" data-reveal>The Menu Profit Boost Audit, for cafés</p>
-      <h2 class="h2" id="ca-title" data-reveal>Drinks, bakes and add-ons, <em>read separately.</em></h2>
-      <p class="lede" data-reveal>The same fixed-price audit, set up for how a café sells. About 10 working days. Founding rate <b class="nowrap" data-price="audit">USD 750</b> for our first five clients.</p>
-    </div>
-    <figure class="audit__img" data-reveal>
-      <img src="assets/img/costing-desk.webp" width="678" height="848" alt="A costing desk: notebook, calculator, supplier invoices and an espresso." loading="lazy" decoding="async">
-    </figure>
-    <div class="audit__cols" data-reveal>
-      <div>
-        <h3 class="label">You send</h3>
-        <ul><li>Your current menu and price board</li><li>8–13 weeks of item sales, with modifiers (milks, shots, syrups)</li><li>Cup and recipe costs, or supplier invoices</li><li>Bakery production and waste counts, if you keep them</li></ul>
-      </div>
-      <div>
-        <h3 class="label">We analyse</h3>
-        <ul><li>Drinks and food on separate matrices</li><li>Sizes, milks and extras</li><li>Bakery sell-through and waste</li><li>Attach rate by daypart</li></ul>
-      </div>
-      <div>
-        <h3 class="label">You receive</h3>
-        <ul><li>A keep, reprice, rework or retire decision for every item and extra</li><li>Bakery par levels</li><li>Bundles and pairings to test</li><li>A delivery price list, report, Excel model and review session</li></ul>
-      </div>
-    </div>
-    <div class="audit__foot" data-reveal>
-      <p class="facts"><span>Fixed price</span><span>Remote</span><span>Exports only — no POS logins</span><span>Covered by an NDA</span></p>
-      <a class="btn" href="index.html#enquire">Request a café audit</a>
-    </div>
-  </section>
-
-  <section class="scorecard" id="scorecard" aria-labelledby="sc-title">
-    <div class="scorecard__head">
-      <p class="label" data-reveal>Free Menu Scorecard</p>
-      <h2 class="h2" id="sc-title" data-reveal>Send us your menu board. Get a scorecard <em>in 48 hours.</em></h2>
-      <p class="lede" data-reveal>A one-page review by our founder, a former hotel sous chef: layout, how prices are shown, item count, the extras list, and three fixes you can make this week.</p>
-      <p class="note" data-reveal>A photo of the board or a link to your Instagram or delivery menu is enough. No sales data, no logins. <a href="privacy.html">How we handle data</a>.</p>
-      <p class="scorecard__sample" data-reveal><a href="assets/sample/PIHOCO-sample-scorecard.pdf" download>See a sample scorecard (PDF)</a></p>
-    </div>
-    <form class="form ticket lead" data-lead-form="scorecard" novalidate data-reveal>
-      <div class="ticket__head"><svg class="ticket__logo" aria-hidden="true"><use href="#pihoco-logo"/></svg><p><span>Scorecard</span><b>Free</b></p></div>
-      <div class="field"><label for="s-biz">Restaurant or café</label><input id="s-biz" name="business" autocomplete="organization" required></div>
-      <div class="field-row">
-        <div class="field"><label for="s-type">Type</label>
-          <select id="s-type" name="venue"><option>Café</option><option>Restaurant</option><option>Bakery or dessert</option><option>Cloud kitchen</option><option>Other</option></select>
-        </div>
-        <div class="field"><label for="s-city">City</label>
-          <select id="s-city" name="city"><option>Dubai</option><option>Abu Dhabi</option><option>Elsewhere in the UAE</option><option>London</option><option>Elsewhere in the UK</option><option>Singapore</option><option>Somewhere else</option></select>
-        </div>
-      </div>
-      <div class="field"><label for="s-name">Your name</label><input id="s-name" name="name" autocomplete="name" required></div>
-      <div class="field"><label for="s-email">Email</label><input id="s-email" name="email" type="email" autocomplete="email" required></div>
-      <div class="field"><label for="s-link">Link to your menu <span>Website, Instagram or delivery app</span></label><input id="s-link" name="menuLink" type="url" inputmode="url" placeholder="https://"></div>
-      <div class="field file"><span class="file__or">or</span>
-        <label class="file__btn" for="s-file"><span data-file-label>Upload the menu</span> <span>PDF or photo · up to 8 MB</span></label>
-        <input id="s-file" class="sr-only" name="menuFile" type="file" accept=".pdf,image/*" data-file>
-      </div>
-      <p class="form__note" data-upload-note hidden>No link? Send the form, then reply to our email with a photo or PDF of the menu.</p>
-      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="btn btn--block" type="submit">Send my menu</button>
-      <p class="form__note" data-form-status role="status">Reviewed by a person, not a bot. Scorecards go out within two working days.</p>
-    </form>
-  </section>
-
-</main>
-
-<footer class="foot">
-  <svg class="foot__logo" role="img" aria-label="PIHOCO"><use href="#pihoco-logo"/></svg>
-  <div class="foot__row">
-    <p>Menu Engineering &amp; F&amp;B Advisory</p>
-    <a href="mailto:contact@pihoco.com" data-email-link>contact@pihoco.com</a>
-    <p><a href="cafes.html">For cafés</a> · <a href="privacy.html">Privacy</a> · © <span data-year>2026</span> PIHOCO</p>
+<script>document.documentElement.classList.add("js")</script>
+<header class="nav">
+  <div class="wrap">
+    <a href="./" aria-label="PIHOCO home"><img src="assets/brand/PIHOCOLOGO.svg" alt="PIHOCO" width="70" height="17"></a>
+    <nav aria-label="Main">
+      <a href="index.html#audit">The audit</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="cafes.html">For cafés</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="btn" href="app/start">Free menu check</a>
+    </nav>
   </div>
-  <svg class="foot__seal" aria-hidden="true"><use href="#pihoco-seal"/></svg>
-  <p class="foot__note">Sample menus and figures on this site are illustrative, not client results.</p>
-</footer>
+</header>
+<main>
+  <section class="phero">
+    <div class="wrap">
+      <span class="label">For cafés, bakeries &amp; dessert brands</span>
+      <h1>In a café, the margin is in <em>the extras.</em></h1>
+      <p class="lede">Sizes, milks, syrups, the bakery counter and the second item at the till decide what a café earns. We read your sales item by item, extras included, and tell you what to change.</p>
+      <div class="ctas"><a class="btn" href="app/start">Get a free menu check <span aria-hidden="true">→</span></a><a class="btn ghost" href="#cafe-audit">See the café audit</a></div>
+    </div>
+  </section>
 
-<script src="assets/js/lenis.min.js" defer></script>
-<script src="assets/js/config.js" defer></script>
-<script src="assets/js/site.js" defer></script>
+  <section id="levers">
+    <div class="wrap">
+      <span class="label">Where café margin hides</span>
+      <h2 class="h2">Small gaps, repeated <em>hundreds of times a week.</em></h2>
+      <div class="levers rv">
+        <div class="lever"><span class="n">01 · Drinks</span><h3>The size ladder and the milk fridge</h3><p>Does the large earn more than the regular, or just cost more? Do oat milk, extra shots and syrups cover what they cost?</p></div>
+        <div class="lever"><span class="n">02 · Bakery</span><h3>What sells out, and what gets binned</h3><p>Bakes look profitable until you count what is left at close. Sell-through by item and day sets how many to bake.</p></div>
+        <div class="lever"><span class="n">03 · Add-ons</span><h3>The second item</h3><p>How often a coffee leaves with something to eat is one of a café's biggest levers. Bundles lift the bill without cutting margin.</p></div>
+        <div class="lever"><span class="n">04 · Delivery</span><h3>Same drink, different cost</h3><p>Commission, cups and bags turn a good dine-in price into a thin delivery one. Some items should come off the app.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cup" id="cup-check">
+    <div class="wrap">
+      <span class="label">Cup check</span>
+      <h2 class="h2">What does one latte <em>actually leave?</em></h2>
+      <p class="lede">Put in your own numbers. Nothing you type here leaves your browser.</p>
+      <div class="grid">
+        <div class="cf">
+          <label><span>Menu price</span><input id="c-price" type="number" inputmode="decimal" value="25" min="0" step="0.5"></label>
+          <label><span>VAT in price %</span><input id="c-vat" type="number" inputmode="decimal" value="5" min="0" step="0.5"></label>
+          <label><span>Coffee per drink</span><input id="c-coffee" type="number" inputmode="decimal" value="2.2" min="0" step="0.1"></label>
+          <label><span>Milk per drink</span><input id="c-milk" type="number" inputmode="decimal" value="1.4" min="0" step="0.1"></label>
+          <label><span>Cup, lid &amp; sleeve</span><input id="c-cup" type="number" inputmode="decimal" value="0" min="0" step="0.1"></label>
+          <label><span>Sold per week</span><input id="c-qty" type="number" inputmode="numeric" value="400" min="0" step="10"></label>
+        </div>
+        <div>
+          <div class="res">
+            <div><span>Left per cup</span><b id="r-left">—</b></div>
+            <div><span>Direct cost, % of net price</span><b id="r-pct">—</b></div>
+            <div><span>Left per week</span><b id="r-week">—</b></div>
+            <div><span>A 1.00 price rise, per week</span><b id="r-up">—</b></div>
+          </div>
+          <p class="note2">Net price excludes VAT. Direct costs only: no labour, rent or waste. Same currency as your menu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="audit caudit" id="cafe-audit">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="label">The Menu Profit Boost Audit, for cafés</span><h2 class="h2">Drinks, bakes and add-ons, <em>read separately.</em></h2></div>
+        <p class="lede" style="margin:0">The same fixed-scope audit, set up for how a café sells. About 10 working days once we have the data.</p>
+      </div>
+      <div class="flow rv">
+        <div><span class="n">01</span><h3>You share</h3><ul><li>Your menu and price board</li><li>8–13 weeks of item sales, with extras</li><li>Cup and recipe costs, or invoices</li><li>Bakery production and waste, if you keep it</li></ul></div>
+        <div><span class="n">02</span><h3>We analyse</h3><ul><li>Drinks and food on separate matrices</li><li>Sizes, milks and extras</li><li>Bakery sell-through and waste</li><li>Add-on rate by time of day</li></ul></div>
+        <div><span class="n">03</span><h3>You receive</h3><ul><li>A decision for every item and extra</li><li>Bakery par levels</li><li>Bundles and pairings to test</li><li>A delivery price list, report and review call</li></ul></div>
+      </div>
+      <div class="cprice">
+        <div><span class="label">Founding rate · first five audits</span><div class="price num"><span data-p="audit0">USD 750</span><s data-p="audit1">USD 1,200</s></div><p>Scope agreed in writing before payment. Exports only, no POS login. NDA available.</p></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center"><div class="cur" role="group" aria-label="Currency"><button data-cur="USD" aria-pressed="true">USD</button><button data-cur="AED" aria-pressed="false">AED</button><button data-cur="GBP" aria-pressed="false">GBP</button><button data-cur="SGD" aria-pressed="false">SGD</button></div><a class="btn light" href="index.html#contact">Request a café audit</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final2">
+    <div class="wrap">
+      <h2>Start with a free <em>menu check.</em></h2>
+      <p class="lede">Score, three opportunities and your prices against Dubai cafés, in about a minute.</p>
+      <div style="margin-top:30px"><a class="btn" href="app/start">Check my menu <span aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 PIHOCO · Menu engineering &amp; F&amp;B advisory · <a href="mailto:contact@pihoco.com">contact@pihoco.com</a></span>
+    <nav aria-label="Footer"><a href="./">Home</a><a href="cafes.html">For cafés</a><a href="menu-xray/">Menu X-ray</a><a href="app/price-index">Dubai price index</a><a href="assets/sample/PIHOCO-January-Menu-Reset.pdf">Free menu-reset guide</a><a href="privacy.html">Privacy</a></nav>
+  </div>
+</footer>
+<div class="mcta" id="mcta"><a class="btn light" href="app/start">Get a free menu check →</a></div>
 <script>
-/* Live numbers for the free X-ray section, counted from the PIHOCO database. Static numbers stay if this fails. */
-(function(){var box=document.querySelector('[data-tool-stats]');if(!box||!window.fetch)return;
-var k='sb_publishable_QhuV3Qj4cbQpjDWorB84FQ_kY4roZeO';
-fetch('https://appccwwupxkfzzuawzzr.supabase.co/rest/v1/rpc/public_stats',{method:'POST',headers:{apikey:k,'Content-Type':'application/json'},body:'{}'})
-.then(function(r){return r.ok?r.json():null}).then(function(s){if(!s||!s.prices)return;
-['prices','menus','comparable_dishes'].forEach(function(f){var el=box.querySelector('[data-stat="'+f+'"]');if(el&&s[f]!=null)el.textContent=Number(s[f]).toLocaleString('en-GB')});}).catch(function(){});})();
+/* Anonymous click counting: no personal data, no cookies, no IP stored. */
+(function(){var U="https://appccwwupxkfzzuawzzr.supabase.co/rest/v1/site_events",K="sb_publishable_QhuV3Qj4cbQpjDWorB84FQ_kY4roZeO";
+window.pihocoTrack=function(ev,label){try{fetch(U,{method:"POST",keepalive:true,headers:{apikey:K,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({event:ev,page:location.pathname.slice(0,80),label:String(label||"").slice(0,80)})}).catch(function(){});}catch(e){}};
+document.addEventListener("click",function(e){var a=e.target.closest("a,button");if(!a)return;var h=a.getAttribute("href")||"",s=a.closest("section,header,footer,.mcta"),w=s?(s.id||s.className.split(" ")[0]||s.tagName.toLowerCase()):"page",ev=null;
+if(/app\/start/.test(h))ev="cta_free_check";else if(a.dataset.pick||/#contact|#enquire/.test(h))ev="cta_contact";else if(/^mailto:/.test(h))ev="cta_email";else if(/menu-xray/.test(h))ev="cta_xray_page";else if(/\.pdf$/.test(h))ev="download_pdf";else if(a.dataset.cur)ev="currency_"+a.dataset.cur.toLowerCase();else if(a.id==="xrReplay")ev="xr_replay";
+if(ev)pihocoTrack(ev,w);},true);
+pihocoTrack("page_view",document.referrer?(new URL(document.referrer)).hostname:"direct");})();
 </script>
+<style>.cur button{color:#b3a898;border-color:rgba(243,238,230,.2)}.cprice .cur{border-color:rgba(243,238,230,.25)}.cprice .cur button[aria-pressed="true"]{background:var(--bg);color:var(--ink)}.cprice .price s{color:#8f857a}</style>
+<script>
+(function(){
+  var P={USD:{s:"USD ",audit:[750,1200]},AED:{s:"AED ",audit:[2750,4400]},GBP:{s:"£",audit:[590,950]},SGD:{s:"SGD ",audit:[990,1600]}};
+  function setCur(c){var p=P[c];document.querySelectorAll("[data-p]").forEach(function(el){var k=el.dataset.p;el.textContent=p.s+p[k.slice(0,-1)][+k.slice(-1)].toLocaleString("en-GB");});document.querySelectorAll(".cur button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.cur===c);});try{localStorage.setItem("pihoco-cur",c);}catch(e){}}
+  document.querySelectorAll(".cur button").forEach(function(b){b.addEventListener("click",function(){setCur(b.dataset.cur);});});
+  var saved=null;try{saved=localStorage.getItem("pihoco-cur");}catch(e){}
+  if(!saved){var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";}catch(e){}saved=/Dubai|Muscat|Qatar|Riyadh|Bahrain|Kuwait/.test(tz)?"AED":/London|Europe\/(Dublin|Belfast)/.test(tz)?"GBP":/Singapore/.test(tz)?"SGD":"USD";}
+  setCur(P[saved]?saved:"USD");
+  var $=function(i){return document.getElementById(i)},n=function(i){var v=parseFloat($(i).value);return isFinite(v)?v:0};
+  var f2=function(v){return v.toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2})},f0=function(v){return Math.round(v).toLocaleString("en-GB")};
+  function calc(){var net=n("c-price")/(1+n("c-vat")/100),cost=n("c-coffee")+n("c-milk")+n("c-cup"),left=net-cost,q=n("c-qty");
+    $("r-left").textContent=net>0?f2(left):"—";$("r-pct").textContent=net>0?(cost/net*100).toFixed(1)+"%":"—";$("r-week").textContent=net>0?f0(left*q):"—";$("r-up").textContent="+"+f0(q/(1+n("c-vat")/100));}
+  ["c-price","c-vat","c-coffee","c-milk","c-cup","c-qty"].forEach(function(i){$(i).addEventListener("input",calc);});calc();
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches,rv=document.querySelectorAll(".rv");
+  if("IntersectionObserver" in window&&!reduce){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{rootMargin:"0px 0px -12% 0px"});rv.forEach(function(el){io.observe(el);});}else rv.forEach(function(el){el.classList.add("in");});
+  var hero=document.querySelector(".phero .btn"),m=$("mcta");if("IntersectionObserver" in window&&hero)new IntersectionObserver(function(e){m.classList.toggle("on",!e[0].isIntersecting&&e[0].boundingClientRect.top<0);}).observe(hero);
+  window.addEventListener("load",function(){if(reduce||!window.Lenis)return;try{window.lenis=new Lenis({autoRaf:true,lerp:0.12,smoothWheel:true,syncTouch:false,anchors:true});}catch(e){}});
+})();
+</script>
+<script src="assets/js/vendor/lenis-1.3.27.min.js" defer></script>
 </body>
 </html>

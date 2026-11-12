@@ -26,6 +26,16 @@
       "source": "/home-v2/(.*)",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/app",
+      "destination": "/menu-xray/",
+      "permanent": false
+    },
+    {
+      "source": "/app/",
+      "destination": "/menu-xray/",
+      "permanent": false
     }
   ]
 }

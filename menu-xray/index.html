@@ -337,25 +337,25 @@ footer a{color:#cfc6ba;text-decoration:none;margin-left:22px}
           <span class="label">01 · Check</span>
           <h3>Menu X-ray</h3>
           <div class="price">Free</div>
-          <p class="note">Always free. Results in 60 seconds.</p>
+          <p class="note">Always free. Results in 60 seconds. Piyush reviews it on request.</p>
           <ul><li>Menu score out of 100</li><li>Three fixes, ranked by money</li><li>Rewritten dish descriptions</li><li>Your prices against Dubai menus</li><li>A link to share</li></ul>
           <a class="btn ghost" href="../app/start" data-cta="tier-free">Check my menu</a>
         </div>
-        <div class="tier">
-          <span class="label">02 · Scorecard</span>
-          <h3>Full Scorecard</h3>
-          <div class="price"><s>AED 179</s>Free</div>
-          <p class="note">Free during launch for the first 100 menus. Fully credited against the audit after.</p>
-          <ul><li>Every fix, ranked and priced</li><li>Two-page PDF for your team</li><li>Reviewed by Piyush within 48 hours</li><li>One clear first move</li></ul>
-          <a class="btn ghost" href="../app/start" data-cta="tier-scorecard">Run the X-ray first</a>
-        </div>
         <div class="tier hi">
-          <span class="label">03 · Audit</span>
+          <span class="label">02 · Audit</span>
           <h3>Menu Profit Audit</h3>
           <div class="price">AED 2,750</div>
           <p class="note">Founding price for the first five restaurants. Then AED 4,400.</p>
           <ul><li>Your recipe costs and sales mix</li><li>What every dish really earns</li><li>Keep, reprice, rework or retire, dish by dish</li><li>A priced action plan and report</li><li>A review call with Piyush</li></ul>
-          <a class="btn light" href="mailto:contact@pihoco.com?subject=Menu%20Profit%20Audit%20%E2%80%94%20founding%20spot" data-cta="tier-audit">Book a founding spot</a>
+          <a class="btn light" href="../index.html#contact" data-cta="tier-audit">Request the audit</a>
+        </div>
+        <div class="tier">
+          <span class="label">03 · Implement</span>
+          <h3>Menu Engineering Sprint</h3>
+          <div class="price">AED 9,200</div>
+          <p class="note">After the audit, we help you make the changes. Scoped separately.</p>
+          <ul><li>Repricing and dish re-engineering</li><li>New menu copy and layout brief</li><li>Staff talking points</li><li>30-day results check</li></ul>
+          <a class="btn ghost" href="../index.html#contact">Ask about a sprint</a>
         </div>
       </div>
     </div>
@@ -364,11 +364,11 @@ footer a{color:#cfc6ba;text-decoration:none;margin-left:22px}
   <!-- FOUNDER -->
   <section class="founder" style="background:var(--bg2);border-top:1px solid var(--line)">
     <div class="wrap">
-      <img src="../assets/img/founder-640.webp" width="1056" height="1320" alt="Portrait of Piyush Raikwar, founder of PIHOCO." decoding="async">
+      <img src="../assets/img/founder-v2-640.webp" width="819" height="1024" alt="Portrait of Piyush Raikwar, founder of PIHOCO." decoding="async">
       <div>
         <span class="label">Built by a chef, not a software company</span>
-        <blockquote>Most menus don't need a new chef. They need the right dishes in the right places, at the right price.</blockquote>
-        <p class="who"><b>Piyush Raikwar</b> · Founder, PIHOCO · Former hotel sous chef, now a menu-engineering consultant</p>
+        <blockquote>“Success is simple: help businesses perform better, help professionals grow, and make every guest experience count.”</blockquote>
+        <p class="who"><b>Piyush Raikwar</b> · Founder, PIHOCO · Eight years across hospitality, now a menu-engineering consultant</p>
         <div class="facts">
           <div><b>Kitchen-tested</b>Advice that works on a Saturday night, not just on a spreadsheet.</div>
           <div><b>Evidence shown</b>Every finding comes from a published rule, with its source.</div>
@@ -425,6 +425,15 @@ footer a{color:#cfc6ba;text-decoration:none;margin-left:22px}
   var hero = document.querySelector(".hero .btn"), m = $("mcta");
   if ("IntersectionObserver" in window && hero) new IntersectionObserver(function(e){ m.classList.toggle("on", !e[0].isIntersecting && e[0].boundingClientRect.top < 0); }).observe(hero);
 })();
+</script>
+<script>
+/* Anonymous click counting: no personal data, no cookies, no IP stored. */
+(function(){var U="https://appccwwupxkfzzuawzzr.supabase.co/rest/v1/site_events",K="sb_publishable_QhuV3Qj4cbQpjDWorB84FQ_kY4roZeO";
+window.pihocoTrack=function(ev,label){try{fetch(U,{method:"POST",keepalive:true,headers:{apikey:K,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({event:ev,page:location.pathname.slice(0,80),label:String(label||"").slice(0,80)})}).catch(function(){});}catch(e){}};
+document.addEventListener("click",function(e){var a=e.target.closest("a,button");if(!a)return;var h=a.getAttribute("href")||"",s=a.closest("section,header,footer,.mcta"),w=s?(s.id||s.className.split(" ")[0]||s.tagName.toLowerCase()):"page",ev=null;
+if(/app\/start/.test(h))ev="cta_free_check";else if(a.dataset.pick||/#contact|#enquire/.test(h))ev="cta_contact";else if(/^mailto:/.test(h))ev="cta_email";else if(/menu-xray/.test(h))ev="cta_xray_page";else if(/\.pdf$/.test(h))ev="download_pdf";else if(a.dataset.cur)ev="currency_"+a.dataset.cur.toLowerCase();else if(a.id==="xrReplay")ev="xr_replay";
+if(ev)pihocoTrack(ev,w);},true);
+pihocoTrack("page_view",document.referrer?(new URL(document.referrer)).hostname:"direct");})();
 </script>
 </body>
 </html>
