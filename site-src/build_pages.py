@@ -280,3 +280,99 @@ priv_js = '''<script src="assets/js/vendor/lenis-1.3.27.min.js" defer></script>
   'What PIHOCO collects on its website, in the free Menu X-ray and during paid engagements, where it is kept and when it is deleted.',
   'privacy.html', priv_css, priv_body, priv_js))
 print('built')
+
+# ---------------------------------------------------------------- PIYUSH QUESTIONNAIRE (team only, noindex)
+Q = [
+ ("Prices & offers", [
+  ("price_audit","Menu Profit Boost Audit: founding price for the first five, then list price","radio",["AED 2,750 → AED 4,400 (current)","Lower founding price","Higher founding price","Other"],0),
+  ("founding_count","How many founding-rate audits?","radio",["5 (current)","3","10","Other"],0),
+  ("price_sprint","Menu Engineering Sprint price","radio",["From AED 9,200 (current)","Quote each time","Other"],0),
+  ("scorecard","Full Scorecard (every dish named, full action plan, Excel)","radio",["Free during launch, decide later (current)","Free forever","Paid later at AED 179","Paid later, different price"],0),
+  ("retainer","Monthly retainer","radio",["Not offered for now (current)","Offer it from AED 2,600/month","Other"],0)]),
+ ("How the numbers work", [
+  ("commission_base","Delivery-app commission is charged on…","radio",["The menu price without VAT (current)","The actual delivery sales the app reports","Menu price including VAT","Not sure, check per client"],0),
+  ("commission_rate","Typical commission in Dubai to use as the default","radio",["25% (current)","20%","30%","Varies a lot, always ask the client"],0),
+  ("delivery_share","Default share of orders through apps, when the owner doesn't say","radio",["0%: ask the owner (current)","20%","35%","50%"],0),
+  ("target_food_cost","Target food-cost % shown as the benchmark","radio",["30% (current)","28%","32%","35%"],0),
+  ("price_test","Size of the price test suggested for popular, low-earning dishes","radio",["5% of the price, rounded (current)","3%","Fixed small step, e.g. AED 1–3"],0),
+  ("popularity_line","Popularity line","radio",["70% of the section average (classic method, current)","Section average (100%)","Other"],0),
+  ("weighting","Contribution line is averaged by…","radio",["Plates sold (current)","Sales value"],0),
+  ("overheads","Overheads (rent, salaried staff) in the audit","radio",["Leave out: dish contribution only (current)","Include, shared by sales","Include, shared by plates sold","Include, shared equally per dish"],0),
+  ("compare_within","Compare dishes within…","radio",["Each menu section (current)","The whole menu"],0)]),
+ ("Delivery & capacity", [
+  ("turnaround_report","Free report reviewed by you: how fast can you reply?","radio",["Within 1 working day (current promise)","Within 2 working days","Within a week"],0),
+  ("turnaround_audit","Audit delivery once data is complete","radio",["About 10 working days (current)","7 working days","15 working days"],0),
+  ("capacity","Audits you can take on per month","radio",["2–3","4–6","7+"],1),
+  ("markets","Markets to accept now","checks",["Dubai","Rest of UAE","Saudi / Qatar / GCC","UK","Singapore","India"],[0,1])]),
+ ("Contact & sign-in", [
+  ("whatsapp","Business WhatsApp number for the site (with country code)","text","+971…",None),
+  ("booking","Booking link for a 20-minute call (Cal.com or Calendly), if you have one","text","https://cal.com/…",None),
+  ("team_emails","Google emails of everyone who should sign in to the team view","text","piyush@…, mitanshu@…, ayush@…",None)]),
+ ("Proof & story", [
+  ("proof","Any past results we can show, with the client's permission?","textarea","e.g. 'Café in JLT, reworked 6 dishes, food cost 34% → 29% in 2 months'",None),
+  ("story_ok","The founder story on the homepage (8 years, 'great guest experience starts behind the menu')","radio",["Approved as is","Needs edits (note below)"],0),
+  ("photo","Photos on the site","radio",["Happy to do a real 30-minute photo shoot","Keep the current images for now","Use only the blazer portrait everywhere"],0),
+  ("anything","Anything else we should know or change?","textarea","",None)]),
+]
+def field(k,label,typ,opts,default):
+    if typ=="radio":
+        o="".join(f'<label class="opt"><input type="radio" name="{k}" value="{x}"{" checked" if i==default else ""}><span>{x}</span></label>' for i,x in enumerate(opts))
+        return f'<fieldset class="q"><legend>{label}</legend><div class="opts">{o}</div><input class="other" name="{k}_note" placeholder="Note (optional)"></fieldset>'
+    if typ=="checks":
+        o="".join(f'<label class="opt"><input type="checkbox" name="{k}" value="{x}"{" checked" if i in default else ""}><span>{x}</span></label>' for i,x in enumerate(opts))
+        return f'<fieldset class="q"><legend>{label}</legend><div class="opts">{o}</div></fieldset>'
+    if typ=="text":
+        return f'<label class="q"><span class="legend">{label}</span><input name="{k}" placeholder="{opts}"></label>'
+    return f'<label class="q"><span class="legend">{label}</span><textarea name="{k}" rows="3" placeholder="{opts}"></textarea></label>'
+qbody = "".join(f'<section class="grp"><span class="label">{i+1:02d}</span><h2>{t}</h2>'+"".join(field(*f) for f in fs)+'</section>' for i,(t,fs) in enumerate(Q))
+q_css = '''
+.qwrap{max-width:820px;margin:0 auto;padding:72px 0 120px}
+.qwrap h1{font-size:clamp(38px,5vw,60px);line-height:1.02;margin:16px 0 0}
+.now{background:var(--bg2);border-left:2px solid var(--brass);padding:16px 20px;margin:30px 0 10px;font-size:14px}
+.now b{font-weight:600}
+.grp{padding:0;margin-top:56px}
+.grp h2{font-size:30px;margin:6px 0 20px}
+.q{display:block;border:0;padding:22px 0 20px;margin:0;background:linear-gradient(var(--line),var(--line)) top/100% 1px no-repeat}
+.q legend{float:left;width:100%}.q .opts{clear:both}
+.q legend,.q .legend{font:400 19px/1.35 var(--serif);padding:0;margin-bottom:12px;display:block}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:9px 12px;font-size:14px;cursor:pointer;background:var(--paper)}
+.opt input{accent-color:var(--ink);margin:0}
+.opt:has(input:checked){border-color:var(--ink);background:#fff}
+.q input:not([type]),.q input.other,.q textarea{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;font:inherit;padding:8px 0;outline:none;border-radius:0}
+.q input.other{margin-top:10px;font-size:13.5px}
+.q textarea{border:1px solid var(--line);padding:10px;resize:vertical}
+.q input:focus,.q textarea:focus{border-color:var(--brass)}
+.send{margin-top:48px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.status{font-size:14px;margin-top:14px}
+'''
+q_body = '''<header class="nav"><div class="wrap"><a href="../../" aria-label="PIHOCO home"><img src="../../assets/brand/PIHOCOLOGO.svg" alt="PIHOCO" width="70" height="17"></a><nav aria-label="Main"><span class="label">Team · for Piyush</span></nav></div></header>
+<main><div class="wrap"><form class="qwrap" id="qf" novalidate>
+  <span class="label">Decisions for PIHOCO · about 10 minutes</span>
+  <h1>A few answers, and the site <em>runs on your numbers.</em></h1>
+  <p class="lede">Each question is pre-filled with what the website and tools use today. Change anything that's wrong, add notes, then send.</p>
+  <div class="now"><b>Until we hear back</b>, the site uses the pre-filled answers: audit AED 2,750 for the first five, then AED 4,400; Full Scorecard free during launch; app commission 25% on the menu price without VAT, only when the owner gives a delivery share; target food cost 30%; 5% price tests; 70% popularity line; dishes compared within each section; no overheads.</div>
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px">
+  ''' + qbody + '''
+  <label class="q"><span class="legend">Your name</span><input name="answered_by" value="Piyush Raikwar"></label>
+  <div class="send"><button class="btn" type="submit">Send my answers</button><button class="btn ghost" type="button" id="dl">Download a copy</button></div>
+  <p class="status" id="st" role="status"></p>
+</form></div></main>'''
+q_js = '''<script>
+(function(){var f=document.getElementById("qf"),st=document.getElementById("st");
+function collect(){var o={},fd=new FormData(f);fd.forEach(function(v,k){if(k==="botcheck")return;if(o[k]){o[k]+=", "+v}else{o[k]=v}});return o;}
+function asText(o){var t="PIHOCO decisions — "+new Date().toLocaleString("en-GB")+"\\n\\n";document.querySelectorAll(".q").forEach(function(q){var l=(q.querySelector("legend,.legend")||{}).textContent||"";var n=(q.querySelector("[name]")||{}).name;if(!n)return;t+=l+"\\n→ "+(o[n]||"—")+(o[n+"_note"]?"  ("+o[n+"_note"]+")":"")+"\\n\\n";});return t;}
+try{var saved=JSON.parse(localStorage.getItem("pihoco-q")||"null");if(saved)Object.keys(saved).forEach(function(k){f.querySelectorAll("[name=\\""+k+"\\"]").forEach(function(el){if(el.type==="radio"||el.type==="checkbox")el.checked=String(saved[k]).split(", ").indexOf(el.value)>-1;else el.value=saved[k];});});}catch(e){}
+f.addEventListener("input",function(){try{localStorage.setItem("pihoco-q",JSON.stringify(collect()))}catch(e){}});
+document.getElementById("dl").addEventListener("click",function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([asText(collect())],{type:"text/plain"}));a.download="PIHOCO-decisions.txt";a.click();});
+f.addEventListener("submit",function(e){e.preventDefault();if(f.botcheck.checked)return;var o=collect(),fd=new FormData();fd.append("access_key","7b083011-54a9-4b02-805a-05c1f4c111e7");fd.append("subject","PIHOCO decisions from "+(o.answered_by||"Piyush"));fd.append("from_name","PIHOCO questionnaire");fd.append("message",asText(o));Object.keys(o).forEach(function(k){fd.append(k,o[k])});
+var b=f.querySelector("button[type=submit]");b.disabled=true;b.textContent="Sending…";
+fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:fd}).then(function(r){return r.json()}).then(function(j){st.textContent=j.success?"Sent. Thank you — Ayush has your answers.":"Didn't send. Use “Download a copy” and share it on WhatsApp.";}).catch(function(){st.textContent="Didn't send. Use “Download a copy” and share it on WhatsApp.";}).finally(function(){b.disabled=false;b.textContent="Send my answers";});});})();
+</script>'''
+qhtml = page('Decisions for Piyush — PIHOCO','Internal questionnaire.','team/decisions/',q_css,q_body,q_js)
+qhtml = qhtml.replace('<meta name="viewport" content="width=device-width, initial-scale=1">','<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex, nofollow">')
+qhtml = qhtml.replace('href="assets/','href="../../assets/').replace('src="assets/','src="../../assets/').replace('url("assets/','url("../../assets/')
+qhtml = qhtml[:qhtml.index('<script>\n/* Anonymous click counting')] + qhtml[qhtml.index('</script>',qhtml.index('/* Anonymous click counting'))+9:]
+(ROOT/'team'/'decisions').mkdir(parents=True,exist_ok=True)
+(ROOT/'team'/'decisions'/'index.html').write_text(qhtml)
+print('questionnaire built')
