@@ -36,6 +36,16 @@
       "source": "/app/",
       "destination": "/menu-xray/",
       "permanent": false
+    },
+    {
+      "source": "/workspace",
+      "destination": "/menu-intelligence/#team",
+      "permanent": false
+    },
+    {
+      "source": "/workspace/(.*)",
+      "destination": "/menu-intelligence/#team",
+      "permanent": false
     }
   ]
 }
