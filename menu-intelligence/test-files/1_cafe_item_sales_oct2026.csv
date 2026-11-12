@@ -1,0 +1,34 @@
+Item Wise Sales Report
+Outlet: Sample Café (illustrative data)
+Period: 01-10-2026 to 31-10-2026
+
+Item Name,Category,Qty,Price,Net Amount
+Cappuccino,Hot Coffee,1240,180,223200
+Café Latte,Hot Coffee,980,190,186200
+Americano,Hot Coffee,410,150,61500
+Flat White,Hot Coffee,260,210,54600
+Hazelnut Mocha,Hot Coffee,190,240,45600
+Masala Chai,Hot Coffee,720,90,64800
+Cold Brew,Cold Beverages,640,220,140800
+Iced Latte,Cold Beverages,580,230,133400
+Classic Cold Coffee,Cold Beverages,870,210,182700
+Fresh Lime Soda,Cold Beverages,330,120,39600
+Berry Smoothie,Cold Beverages,120,260,31200
+Avocado Toast,Breakfast,210,390,81900
+Masala Omelette,Breakfast,340,220,74800
+Pancake Stack,Breakfast,260,320,83200
+Poha Bowl,Breakfast,180,160,28800
+Granola Yoghurt Bowl,Breakfast,70,290,20300
+Paneer Tikka Sandwich,Sandwiches,520,280,145600
+Chicken Club Sandwich,Sandwiches,450,340,153000
+Grilled Veg Sandwich,Sandwiches,300,240,72000
+Pesto Mozzarella Panini,Sandwiches,110,320,35200
+Penne Arrabbiata,Mains,280,360,100800
+Chicken Alfredo Pasta,Mains,330,420,138600
+Thai Green Curry Bowl,Mains,140,440,61600
+Mushroom Risotto,Mains,60,460,27600
+Margherita Pizza,Mains,390,380,148200
+Chocolate Brownie,Desserts,610,170,103700
+Blueberry Cheesecake,Desserts,230,290,66700
+Tiramisu,Desserts,90,320,28800
+Total,,10910,,2534400
